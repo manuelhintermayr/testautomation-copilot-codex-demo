@@ -8,30 +8,36 @@ This repository demonstrates the capabilities of AI-assisted test automation usi
 
 ## Repository Structure
 
-### System Under Test (SUT)
-The `sut/` folder contains the application being tested - a fully functional e-commerce webshop built with Vue.js 3 and Tailwind CSS. This single-page application includes:
-- Product catalog with search functionality
-- Shopping cart management
-- Checkout process with delivery options
-- Order confirmation
-
 ### Step-by-Step Solutions
 The repository contains multiple `step_x` folders (step_0, step_1, step_2, ... step_n), where each folder represents an incremental advancement in the test automation journey:
 
-- **step_0**: Initial Playwright project setup
+- **step_0**: Initial Playwright project setup and System Under Test (SUT)
+  - Contains the `sut/` subfolder with a fully functional e-commerce webshop built with Vue.js 3 and Tailwind CSS
+  - Includes Playwright test framework configuration
+  - See `step_0/PROMPT.md` for detailed prompts and implementation notes
 - **step_1** through **step_n**: Each subsequent step builds upon the previous one, adding new test scenarios, patterns, or automation capabilities
 
 Each step folder contains:
 - The complete solution code for that step
-- A README.md describing the prompt used to generate the solution
-- Documentation of what was accomplished in that step
+- A PROMPT.md file documenting the exact prompts used and the results achieved
+- A README.md describing what was accomplished in that step
 - Any relevant configuration or setup instructions
+
+### System Under Test (SUT)
+Located in `step_0/sut/`, this folder contains the application being tested - a fully functional e-commerce webshop. Features include:
+- Product catalog with 5 sample products
+- Real-time search functionality
+- Shopping cart management (add/remove/quantity control)
+- Checkout process with delivery options (pickup vs delivery)
+- Order confirmation with cart reset
 
 ## Getting Started
 
-1. Review the System Under Test in the `sut/` folder
-2. Start with `step_0/` and progress through each step sequentially
-3. Each step's README.md contains the exact prompt used and explains the evolution of the test automation
+1. Start with `step_0/` folder
+2. Review the `step_0/PROMPT.md` to understand the prompts and implementation
+3. Explore the System Under Test in `step_0/sut/`
+4. Progress through each subsequent step sequentially
+5. Each step's PROMPT.md and README.md explain the evolution of the test automation
 
 ## Purpose
 

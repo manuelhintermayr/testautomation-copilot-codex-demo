@@ -23,13 +23,20 @@ This step establishes the foundation for test automation by initializing a new P
    ├── .github/
    │   └── workflows/
    │       └── playwright.yml       # CI/CD workflow for GitHub Actions
+   ├── sut/                          # System Under Test (webshop application)
+   │   ├── shop.html                # Single-page e-commerce app
+   │   ├── README.md                # SUT documentation
+   │   ├── RUNNING.md               # How to run the app
+   │   └── VISUAL_GUIDE.md          # Visual description
    ├── tests/
    │   └── example.spec.ts          # Sample test file
    ├── node_modules/                # Dependencies (installed automatically)
    ├── .gitignore                   # Playwright-specific ignore rules
    ├── package.json                 # Project dependencies
    ├── package-lock.json            # Locked dependency versions
-   └── playwright.config.ts         # Playwright configuration
+   ├── playwright.config.ts         # Playwright configuration
+   ├── PROMPT.md                    # Detailed prompts and implementation
+   └── README.md                    # This file
    ```
 
 3. **Configuration Details**
@@ -53,10 +60,12 @@ The initialization created an `example.spec.ts` file with two basic tests:
 ### Next Steps
 
 Future steps will build upon this foundation by:
-- Creating tests for the TechShop application in the `sut` folder
+- Creating tests for the TechShop application in the `sut/` subfolder
 - Implementing page object models
 - Adding custom test utilities and helpers
 - Expanding test coverage for all features
+
+For complete details on the prompts used and full implementation, see [PROMPT.md](PROMPT.md).
 
 ## Running the Tests
 
