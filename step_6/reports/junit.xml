@@ -1,0 +1,46 @@
+<testsuites id="" name="" tests="21" failures="0" skipped="0" errors="0" time="39.559219">
+<testsuite name="techshop.spec.ts" timestamp="2025-11-05T16:09:41.263Z" hostname="chromium" tests="21" failures="0" skipped="0" time="36.183" errors="0">
+<testcase name="TechShop - Home Page › should load the home page with correct title" classname="techshop.spec.ts" time="1.53">
+</testcase>
+<testcase name="TechShop - Home Page › should display hero section with call to action" classname="techshop.spec.ts" time="1.358">
+</testcase>
+<testcase name="TechShop - Home Page › should display 20 products on home page" classname="techshop.spec.ts" time="1.266">
+</testcase>
+<testcase name="TechShop - Home Page › should show product details correctly" classname="techshop.spec.ts" time="1.527">
+</testcase>
+<testcase name="TechShop - Home Page › should display featured and new badges" classname="techshop.spec.ts" time="1.523">
+</testcase>
+<testcase name="TechShop - Search Functionality › should filter products based on search query" classname="techshop.spec.ts" time="1.966">
+</testcase>
+<testcase name="TechShop - Search Functionality › should show &quot;no results&quot; message for non-existent product" classname="techshop.spec.ts" time="1.867">
+</testcase>
+<testcase name="TechShop - Search Functionality › should clear search and show all products" classname="techshop.spec.ts" time="1.81">
+</testcase>
+<testcase name="TechShop - Shopping Cart › should add product to cart and update cart count" classname="techshop.spec.ts" time="1.427">
+</testcase>
+<testcase name="TechShop - Shopping Cart › should navigate to cart page and display added items" classname="techshop.spec.ts" time="1.534">
+</testcase>
+<testcase name="TechShop - Shopping Cart › should increment and decrement product quantity" classname="techshop.spec.ts" time="1.77">
+</testcase>
+<testcase name="TechShop - Shopping Cart › should remove product from cart" classname="techshop.spec.ts" time="1.795">
+</testcase>
+<testcase name="TechShop - Shopping Cart › should calculate cart total correctly" classname="techshop.spec.ts" time="1.621">
+</testcase>
+<testcase name="TechShop - Checkout Process › should navigate to checkout page from cart" classname="techshop.spec.ts" time="1.942">
+</testcase>
+<testcase name="TechShop - Checkout Process › should select delivery method" classname="techshop.spec.ts" time="1.491">
+</testcase>
+<testcase name="TechShop - Checkout Process › should validate required fields before placing order" classname="techshop.spec.ts" time="1.673">
+</testcase>
+<testcase name="TechShop - Checkout Process › should complete checkout and show confirmation" classname="techshop.spec.ts" time="1.593">
+</testcase>
+<testcase name="TechShop - Checkout Process › should clear cart after successful order" classname="techshop.spec.ts" time="1.78">
+</testcase>
+<testcase name="TechShop - Theme Toggle › should toggle between light and dark mode" classname="techshop.spec.ts" time="2.108">
+</testcase>
+<testcase name="TechShop - Navigation › should navigate between pages" classname="techshop.spec.ts" time="1.445">
+</testcase>
+<testcase name="TechShop - Navigation › should scroll to products when clicking Explore Collection" classname="techshop.spec.ts" time="3.157">
+</testcase>
+</testsuite>
+</testsuites>

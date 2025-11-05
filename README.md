@@ -10,9 +10,9 @@
 :-------------------------:|:-------------------------:|:-------------------------:
 **Step 3:** E2E Testing | **Step 4:** Custom HTML Report | **Step 4:** Confluence Report
 
-![Step 5 - Page Object Model](step_5/preview.png) |  | 
+![Step 5 - Page Object Model](step_5/preview.png) | ![Step 6 - Test Stabilization](step_6/preview.png) | 
 :-------------------------:|:-------------------------:|:-------------------------:
-**Step 5:** Page Object Model & CI/CD |  | 
+**Step 5:** Page Object Model & CI/CD | **Step 6:** Test Stabilization | 
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -113,6 +113,18 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - GitHub Actions CI/CD workflow for automated testing on push/PR
   - Enhanced test readability and maintainability for enterprise-scale automation
   - See `step_5/PROMPT.md` for POM implementation and architectural improvements
+
+- **step_6**: Test Stabilization & Single Worker Configuration
+  
+  ![Step 6 Preview](step_6/preview.png)
+  
+  - Comprehensive test failure analysis and systematic fixes achieving 100% success rate
+  - Single worker configuration (workers: 1) for sequential and reliable test execution
+  - Fixed selector issues in Page Object Model classes for consistent element targeting
+  - Stabilized cart operations, checkout flow, and theme toggle functionality
+  - Optimized test performance from 12 failing tests to 0 failing tests
+  - Enhanced test reliability and maintainability for production-ready automation
+  - See `step_6/PROMPT.md` for detailed stabilization process and fixes
 
 
 ## Purpose
