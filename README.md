@@ -62,6 +62,15 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - Visible browser execution (headless: false) for easy debugging
   - See `step_3/PROMPT.md` for testing implementation and configuration details
 
+- **step_4**: JUnit Reporting with Custom HTML & Confluence Reports
+  - Added JUnit XML reporter for CI/CD integration alongside existing HTML reporter
+  - Custom Node.js report generator parsing junit.xml to create beautiful HTML reports
+  - Professional styled reports with gradients, cards, and comprehensive statistics
+  - Confluence-compatible markdown reports ready for copy-paste into documentation
+  - Multiple report formats: JUnit XML, Custom HTML, Confluence markdown
+  - Automated npm scripts for complete testing and reporting workflow
+  - See `step_4/PROMPT.md` for reporting implementation and custom generator details
+
 
 ## Purpose
 
