@@ -1,35 +1,29 @@
 {
   "name": "step_4",
   "version": "1.0.0",
-  "description": "TechShop SUT with JUnit reporting and custom HTML/Confluence report generation",
+  "description": "TechShop SUT with Page Object Model pattern for maintainable tests",
   "main": "index.js",
   "scripts": {
     "dev": "vite --open sut/index.html --port 8888",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "playwright test",
-    "test:report": "playwright test && playwright show-report",
-    "test:ci": "playwright test",
+    "test": "playwright test && playwright show-report",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
-    "show-report": "playwright show-report",
-    "generate-reports": "node report-generator.js",
-    "test:full": "npm run test && npm run generate-reports",
-    "open-html-report": "start reports/custom-report.html"
+    "show-report": "playwright show-report"
   },
   "keywords": [
     "playwright",
     "testing",
     "e-commerce",
     "vite",
-    "automated-testing"
+    "page-object-model"
   ],
   "author": "manuelhintermayr",
   "license": "MIT",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.0",
-    "vite": "^5.0.0",
-    "xml2js": "^0.6.2"
+    "vite": "^5.0.0"
   }
 }

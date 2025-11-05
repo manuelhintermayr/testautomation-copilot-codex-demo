@@ -1,397 +1,275 @@
 # Step 4: Prompts and Implementation
 
-## Preview
-
-### Custom HTML Report
-![TechShop Step 4 - HTML Report Generation](preview_html.png)
-
-### Confluence Markdown Report
-![TechShop Step 4 - Confluence Report Generation](preview_confluence.png)
-
 This document describes the prompts used to create this step and the results achieved.
 
 ## Original Problem Statement / Prompt
 
 **German (Original):**
 
-> Danke. Jetzt erstelle bitte den "step_4"-folder, wo auch alles von step_3" rüberkopiert wird und dann, du kennst es, die md files angepasst werden. Ich will, nun dass du du junit als repoter hinzufügst. Dann führst du "npm run test" aus und kopierst das junit.xml report file in einen report-ordner. Aus diesem junit.xml report erstellst du bitte einen eigenen html report basierend auf den test results, schön dargestellt. Auch erstellst du ein confluence report file welches ebenfalls in confluence markdown passend für eine confluence page ebenfalls den report schön dargestellt abbildet
+> Jetzt erstelle bitte den "step_4"-folder wo auch alles von step_3 rüberkopiert wird und dann, du kennst es, die md files angepasst werden. Ich will, dass du nun für die playwright tests page objects einführst. Gerne legst dafür im utils ordner für die einzelne bereiche unterschiedliche page object klassen ein die das page object inherit haben und eine base page object klasse. Auf diese klasse kann dann zugegriffen wird in den spec.ts klassen. Bei den einzelnen tests kann ich dann statt der normalen page object auch die page object klassen abrufen a la: 
+>
+> test('xxx', async ({ home, cart, checkout, search, ....}) => {
+>  
+> Dazu kannst du { test } from '@playwright/test' erweitern in einer eigenen base klasse und stattdessen wird in den tests nicht mehr "import { test, expect } from '@playwright/test';" gemacht sonder nur mehr das expect. Das "test" wird von dieser neuen base klassen übernommen
 
 **English Translation:**
 
-> Thanks. Now please create the "step_4" folder, where everything from step_3 is copied over and then, you know it, the md files are adapted. I want you to add junit as a reporter. Then you run "npm run test" and copy the junit.xml report file into a report folder. From this junit.xml report, please create your own HTML report based on the test results, beautifully displayed. Also create a confluence report file which is also displayed beautifully in confluence markdown suitable for a confluence page.
-
-## Implementation Summary
-
-### Final Configuration
-- **JUnit XML Reporter** - Added to Playwright configuration alongside HTML reporter
-- **Custom Report Generator** - Node.js script to parse junit.xml and generate custom reports
-- **Reports Directory** - Organized structure for all report files
-- **Multiple Output Formats** - HTML, Confluence markdown, and JUnit XML
-- **Automated Scripts** - npm commands for complete testing and reporting workflow
+> Now please create the "step_4" folder where everything from step_3 is copied over and then, you know it, the md files are adapted. I want you to now introduce page objects for the Playwright tests. Please create different page object classes for the individual areas in the utils folder that inherit from a base page object class. These classes can then be accessed in the spec.ts files. In the individual tests, instead of the normal page object, you can access the page object classes like: 
+>
+> test('xxx', async ({ home, cart, checkout, search, ....}) => {
+>  
+> For this, you can extend { test } from '@playwright/test' in your own base class, and instead in the tests, "import { test, expect } from '@playwright/test';" is no longer used, but only expect. The "test" is taken from this new base class.
 
 ## Tasks Breakdown
 
-### Task 1: Create step_4 Structure ✅
+### Task 1: Create step_4 Structure
+- Create step_4 folder
 - Copy all files from step_3 to step_4
-- Maintain existing test suite and configuration
-- Update package.json metadata
-
-### Task 2: Add JUnit Reporter ✅
-**Playwright Configuration Update:**
-```typescript
-reporter: [
-  ['html'],
-  ['junit', { outputFile: 'reports/junit.xml' }]
-],
-```
-
-### Task 3: Create Reports Directory Structure ✅
-- Create `reports/` folder
-- Add `.gitkeep` file with documentation
-- Organize for multiple report types
-
-### Task 4: Execute Tests and Generate JUnit XML ✅
-- Run `npm run test` to generate junit.xml
-- JUnit XML automatically saved to `reports/junit.xml`
-- Maintain existing test coverage (22+ tests)
-
-### Task 5: Create Custom HTML Report Generator ✅
-**Features Implemented:**
-- Parse junit.xml using xml2js library
-- Generate beautiful HTML with modern styling
-- Professional design with gradients and cards
-- Comprehensive statistics and metrics
-- Mobile-responsive layout
-- Status indicators with color coding
-
-**HTML Report Includes:**
-- Executive summary with key metrics
-- Detailed test results table
-- Pass rate analysis
-- Execution time statistics
-- Error messages and failure details
-- Professional styling and branding
-
-### Task 6: Create Confluence Markdown Report ✅
-**Features Implemented:**
-- Confluence-compatible markdown syntax
-- Status panels and info boxes
-- Professional table formatting
-- Executive summary section
-- Quality metrics and recommendations
-- Copy-paste ready for Confluence pages
-
-**Confluence Report Includes:**
-- Test execution overview with status panels
-- Detailed test results table
-- Quality metrics and analysis
-- Recommendations based on results
-- Professional formatting with icons and colors
-
-### Task 7: Update Package Scripts ✅
-**New Scripts Added:**
-```json
-{
-  "generate-reports": "node report-generator.js",
-  "test:full": "npm run test && npm run generate-reports", 
-  "open-html-report": "start reports/custom-report.html"
-}
-```
-
-### Task 8: Install Dependencies ✅
-- Added xml2js for XML parsing
-- Updated package.json with new dependency
-- All dependencies properly configured
-
-## Technical Implementation Details
-
-### Report Generator Architecture
-```javascript
-class ReportGenerator {
-  - generateHtmlReport() // Creates beautiful HTML report
-  - generateConfluenceReport() // Creates Confluence markdown
-  - calculateStats() // Computes test metrics
-  - parseJunitXml() // Parses XML test results
-}
-```
-
-### File Structure
-```
-step_4/
-├── reports/
-│   ├── junit.xml              # JUnit XML test results
-│   ├── custom-report.html     # Custom HTML report
-│   └── confluence-report.md   # Confluence markdown
-├── report-generator.js        # Report generation script
-├── tests/                     # Test suite (unchanged)
-├── sut/                       # System under test (unchanged)
-└── package.json              # Updated with new scripts
-```
-
-### Workflow Integration
-1. **Development:** `npm run dev` (start server)
-2. **Testing:** `npm run test` (run tests, generate junit.xml)
-3. **Reporting:** `npm run generate-reports` (create custom reports)
-4. **Full Workflow:** `npm run test:full` (test + reports in one command)
-5. **View Reports:** `npm run open-html-report` (open HTML report)
-
-## Results Achieved
-
-### Multiple Report Formats
-- **JUnit XML** - Standard format for CI/CD integration
-- **Custom HTML** - Beautiful, stakeholder-friendly reports
-- **Confluence Markdown** - Ready-to-paste documentation
-
-### Professional Styling
-- Modern gradient backgrounds
-- Card-based layout design
-- Responsive mobile-friendly interface
-- Status indicators with color coding
-- Professional typography and spacing
-
-### Comprehensive Metrics
-- Total tests, passed, failed, skipped counts
-- Pass rate percentage calculation
-- Execution time analysis
-- Detailed error message capture
-- Quality recommendations
-
-### Automated Workflow
-- Single command execution (`npm run test:full`)
-- Automatic report generation after tests
-- Easy report viewing with browser opening
-- CI/CD ready with JUnit XML output
-
-## Benefits Delivered
-
-1. **CI/CD Integration** - Standard JUnit XML for all systems
-2. **Stakeholder Communication** - Beautiful HTML reports
-3. **Documentation Ready** - Confluence markdown format
-4. **Developer Friendly** - Easy npm script workflow
-5. **Professional Quality** - Modern styling and comprehensive metrics
-6. **Multi-Audience Support** - Technical and non-technical report formats
-
-This implementation provides a complete testing and reporting solution suitable for enterprise development environments.
-
-## Tasks Breakdown
-
-### Task 1: Create step_3 Structure
-- Create step_3 folder
-- Copy all files from step_1 to step_3
-- Maintain professional TechShop design
+- Maintain all test infrastructure and configuration
 - Update documentation files
 
-### Task 2: Configure Vite Server on Port 8888
-**Requirements:**
-- Configure Vite to run on port 8888
-- Update dev script in package.json
-- Ensure SUT is served correctly
+### Task 2: Implement Page Object Model (POM) Pattern
 
-### Task 3: Configure Playwright for Automated Testing
-**Sub-task 3.1: Update playwright.config.ts**
-- Set `baseURL` to `http://localhost:8888`
-- Configure `webServer` to automatically start/stop Vite
-- Set `headless: false` to show browser during tests
-- Limit workers to 2 (`workers: 2`)
-- Configure server timeout and reuse
+**Sub-task 2.1: Create Base Page Object Class**
+- Create `utils/BasePage.ts`
+- Base class with common functionality
+- Methods for navigation, waiting, clicking, filling forms
+- Shared utilities for all page objects
 
-**Sub-task 3.2: Update Test Command**
-- Modify `npm run test` to run tests and then show report
-- Command: `playwright test && playwright show-report`
-- Automatic server management via webServer config
+**Sub-task 2.2: Create Individual Page Object Classes**
+- Create `utils/HomePage.ts` - Home/landing page functionality
+- Create `utils/SearchPage.ts` - Search functionality
+- Create `utils/CartPage.ts` - Shopping cart operations
+- Create `utils/CheckoutPage.ts` - Checkout process
+- Create `utils/ConfirmationPage.ts` - Order confirmation
+- Create `utils/NavigationPage.ts` - Navigation and theme toggle
 
-### Task 4: Create Comprehensive Test Suite
-**Sub-task 4.1: Home Page Tests**
-- Test page loads with correct title
-- Verify hero section displays
-- Check all 20 products are shown
-- Validate product details (name, description, price, buttons)
-- Test featured and new badges
+**Sub-task 2.3: Create Custom Test Fixtures**
+- Create `utils/test-fixtures.ts`
+- Extend Playwright's `test` with custom fixtures
+- Provide page object instances as fixtures
+- Export custom `test` and `expect`
 
-**Sub-task 4.2: Search Functionality Tests**
-- Test product filtering by search query
-- Verify search results message
-- Test "no results" state
-- Test clear search functionality
+**Sub-task 2.4: Refactor Tests to Use Page Objects**
+- Update all test files to use custom fixtures
+- Import `test` and `expect` from `test-fixtures.ts`
+- Use page objects instead of direct page interactions
+- Simplify test code with page object methods
 
-**Sub-task 4.3: Shopping Cart Tests**
-- Test adding products to cart
-- Verify cart count updates
-- Test cart page navigation
-- Test quantity increment/decrement
-- Test product removal from cart
-- Verify cart total calculation
-
-**Sub-task 4.4: Checkout Process Tests**
-- Test navigation to checkout
-- Test delivery method selection
-- Verify form validation
-- Test complete checkout flow
-- Verify order confirmation
-- Test cart clearing after order
-
-**Sub-task 4.5: Additional Tests**
-- Test dark/light mode toggle
-- Test navigation between pages
-- Test scroll functionality
-
-### Task 5: Update Documentation
+### Task 3: Update Documentation
 - Create PROMPT.md with implementation details
-- Update README.md for step_3
-- Document test suite and automation
+- Update README.md for step_4
+- Document Page Object Model structure and benefits
 
 ## Implementation Result
 
 **Pull Request:** This implementation continues from [PR #1](https://github.com/manuelhintermayr/testautomation-copilot-codex-demo/pull/1)
 
-### Files Created/Modified in step_3/
+### Files Created in step_4/utils/
 
-#### Modified Configuration Files:
+#### 1. **`BasePage.ts`** (Base Page Object Class)
+- Common functionality for all page objects
+- Methods: `goto()`, `waitForPageLoad()`, `click()`, `fill()`, `isVisible()`
+- Shared utilities and helper methods
 
-1. **`package.json`**
-   - Updated name to "step_3"
-   - Modified dev script: `vite --open sut/index.html --port 8888`
-   - Modified test script: `playwright test && playwright show-report`
-   - Updated description and keywords
+#### 2. **`HomePage.ts`** (Home Page Object)
+- Hero section interactions
+- Product display and management
+- Add to cart functionality
+- Product card interactions
+- Badge checking (Featured, New)
 
-2. **`playwright.config.ts`**
-   - Set `baseURL: 'http://localhost:8888'`
-   - Set `headless: false` for visible test execution
-   - Set `workers: 2` to limit parallel execution
-   - Configured `webServer`:
-     - Command: `npm run dev`
-     - URL: `http://localhost:8888`
-     - Reuse existing server in non-CI environments
-     - Timeout: 120 seconds
+#### 3. **`SearchPage.ts`** (Search Page Object)
+- Search input handling
+- Result filtering
+- Clear search functionality
+- No results handling
 
-#### New Test Files:
+#### 4. **`CartPage.ts`** (Cart Page Object)
+- Cart navigation
+- Item quantity management (increment/decrement)
+- Remove items from cart
+- Cart badge interactions
+- Order summary validation
 
-3. **`tests/techshop.spec.ts`** (14.3 KB)
-   - Comprehensive test suite with 25+ tests
-   - Organized into test suites:
-     - Home Page (5 tests)
-     - Search Functionality (3 tests)
-     - Shopping Cart (6 tests)
-     - Checkout Process (5 tests)
-     - Theme Toggle (1 test)
-     - Navigation (2 tests)
+#### 5. **`CheckoutPage.ts`** (Checkout Page Object)
+- Delivery method selection
+- Customer information form filling
+- Order placement
+- Form validation
+- Complete checkout flows
 
-### Technical Implementation Details
+#### 6. **`ConfirmationPage.ts`** (Confirmation Page Object)
+- Order confirmation validation
+- Order number extraction
+- Customer name verification
+- Continue shopping functionality
 
-**Automated Server Management:**
+#### 7. **`NavigationPage.ts`** (Navigation Page Object)
+- Page navigation (Home, Cart)
+- Theme toggle (Dark/Light mode)
+- Cart count badge
+- Logo and button interactions
 
+#### 8. **`test-fixtures.ts`** (Custom Test Fixtures)
 ```typescript
-// playwright.config.ts
-export default defineConfig({
-  // ...
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:8888',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+export const test = base.extend<PageObjects>({
+  home: async ({ page }, use) => { /* ... */ },
+  search: async ({ page }, use) => { /* ... */ },
+  cart: async ({ page }, use) => { /* ... */ },
+  checkout: async ({ page }, use) => { /* ... */ },
+  confirmation: async ({ page }, use) => { /* ... */ },
+  navigation: async ({ page }, use) => { /* ... */ },
+});
+
+export { expect } from '@playwright/test';
+```
+
+### Test File Changes
+
+**Before (step_3):**
+```typescript
+import { test, expect } from '@playwright/test';
+
+test('should add product to cart', async ({ page }) => {
+  await page.goto('/sut/index.html');
+  await page.waitForSelector('.product-card', { timeout: 10000 });
+  await page.locator('.product-card').first()
+    .getByRole('button', { name: 'Add to Cart' }).click();
+  const cartBadge = page.locator('button:has-text("Cart") span');
+  await expect(cartBadge).toHaveText('1');
 });
 ```
 
-**How it works:**
-1. Run `npm test`
-2. Playwright checks if server is running on localhost:8888
-3. If not running, starts Vite server with `npm run dev`
-4. Waits for server to be ready (max 120s)
-5. Runs all tests with visible browsers (headless: false)
-6. Uses max 2 parallel workers
-7. Generates HTML report
-8. Stops the server (if it started it)
-9. Displays HTML report automatically
+**After (step_4):**
+```typescript
+import { test, expect } from '../utils/test-fixtures';
 
-**Test Execution Flow:**
-
-```bash
-npm test
-↓
-Playwright starts
-↓
-Check if localhost:8888 is running
-↓
-No → Start Vite server → Wait for ready
-Yes → Reuse existing server
-↓
-Run tests (headless: false, workers: 2)
-↓
-Generate HTML report
-↓
-Stop server (if started by Playwright)
-↓
-Open HTML report in browser
+test('should add product to cart', async ({ home, cart }) => {
+  await home.navigateToHome();
+  await home.addFirstProductToCart();
+  const badgeCount = await cart.getCartBadgeCount();
+  expect(badgeCount).toBe('1');
+});
 ```
 
-**Vite Configuration:**
+### Benefits of Page Object Model
 
-```json
-// package.json
-{
-  "scripts": {
-    "dev": "vite --open sut/index.html --port 8888",
-    "test": "playwright test && playwright show-report"
-  }
-}
+**1. Maintainability**
+- Changes to UI only require updates to page objects
+- Tests remain unchanged when selectors change
+- Single source of truth for element locations
+
+**2. Reusability**
+- Page object methods can be reused across tests
+- Common workflows encapsulated in page objects
+- Reduces code duplication
+
+**3. Readability**
+- Tests read like user stories
+- Business logic separated from technical implementation
+- Self-documenting code
+
+**4. Testability**
+- Page objects can be unit tested separately
+- Easier to mock for testing
+- Better separation of concerns
+
+**5. Scalability**
+- Easy to add new page objects
+- Modular structure supports growth
+- Team collaboration improved
+
+## Technical Implementation Details
+
+### Page Object Hierarchy
+
+```
+BasePage (abstract functionality)
+  ├── HomePage
+  ├── SearchPage
+  ├── CartPage
+  ├── CheckoutPage
+  ├── ConfirmationPage
+  └── NavigationPage
 ```
 
-### Test Suite Coverage
+### Custom Test Fixtures Pattern
 
-**Home Page Tests:**
-- ✅ Page loads with correct title
-- ✅ Hero section displays with CTA
-- ✅ All 20 products are shown
-- ✅ Product details are correct
-- ✅ Badges (Featured/New) display properly
+```typescript
+// test-fixtures.ts
+type PageObjects = {
+  home: HomePage;
+  search: SearchPage;
+  cart: CartPage;
+  // ...
+};
 
-**Search Functionality:**
-- ✅ Products filter based on search
-- ✅ Search results message displays
-- ✅ No results message for invalid search
-- ✅ Clear search resets to all products
+export const test = base.extend<PageObjects>({
+  home: async ({ page }, use) => {
+    const homePage = new HomePage(page);
+    await use(homePage);
+  },
+  // ...
+});
+```
 
-**Shopping Cart:**
-- ✅ Add to cart updates count
-- ✅ Cart page shows added items
-- ✅ Quantity increment/decrement works
-- ✅ Remove product from cart
-- ✅ Cart total calculates correctly
-- ✅ Empty cart state displays
+### Usage in Tests
 
-**Checkout Process:**
-- ✅ Navigate to checkout from cart
-- ✅ Delivery method selection (Delivery/Pickup)
-- ✅ Form validation for required fields
-- ✅ Complete checkout flow
-- ✅ Order confirmation displays
-- ✅ Cart clears after successful order
+```typescript
+// Tests can now use page objects directly as fixtures
+test('test name', async ({ home, cart, checkout }) => {
+  await home.navigateToHome();
+  await home.addFirstProductToCart();
+  await cart.navigateToCart();
+  await cart.proceedToCheckout();
+  await checkout.completeCheckoutWithPickup('John', 'john@example.com');
+});
+```
 
-**Additional Features:**
-- ✅ Dark/Light mode toggle
-- ✅ Navigation between pages
-- ✅ Scroll to products functionality
+## Comparison: step_3 vs step_4
 
-## Comparison: step_1 vs step_3
-
-| Aspect | step_1 | step_3 |
+| Aspect | step_3 | step_4 |
 |--------|--------|--------|
-| **Tests** | Example Playwright tests | 25+ comprehensive tests |
-| **Server Config** | Manual start | Automatic start/stop |
-| **Port** | Default (random) | Fixed :8888 |
-| **Headless** | Default (true) | Configured (false) |
-| **Workers** | Unlimited | Limited to 2 |
-| **Test Command** | `playwright test` | `test && show-report` |
-| **Coverage** | Minimal | Complete e2e flows |
-| **Automation** | Manual | Fully automated |
+| **Pattern** | Direct page interactions | Page Object Model |
+| **Test Code** | Verbose, technical | Concise, business-focused |
+| **Locators** | In test files | In page objects |
+| **Reusability** | Low | High |
+| **Maintainability** | Medium | High |
+| **Readability** | Technical | Business-readable |
+| **Code Lines** | ~14,000 (tests) | ~9,700 (tests) + ~18,500 (PO) |
+| **Test Import** | `@playwright/test` | Custom `test-fixtures` |
+| **Fixtures** | `{ page }` | `{ home, cart, checkout, ... }` |
+
+## File Structure
+
+```
+step_4/
+├── utils/
+│   ├── BasePage.ts              # Base page object class
+│   ├── HomePage.ts              # Home page object
+│   ├── SearchPage.ts            # Search page object
+│   ├── CartPage.ts              # Cart page object
+│   ├── CheckoutPage.ts          # Checkout page object
+│   ├── ConfirmationPage.ts      # Confirmation page object
+│   ├── NavigationPage.ts        # Navigation page object
+│   └── test-fixtures.ts         # Custom test fixtures
+├── tests/
+│   └── techshop.spec.ts         # Refactored tests using POM
+├── sut/
+│   └── index.html               # TechShop application
+├── package.json                 # Updated description
+├── playwright.config.ts         # Unchanged
+├── PROMPT.md                    # This file
+└── README.md                    # Step documentation
+```
 
 ## Running the Implementation
 
-### Run All Tests (Automated)
+### Run Tests with Page Objects
 
 ```bash
-cd step_3
+cd step_4
 
 # Install dependencies (if not already installed)
 npm install
@@ -399,96 +277,81 @@ npm install
 # Install Playwright browsers (if not already installed)
 npx playwright install
 
-# Run all tests with automatic server management
+# Run all tests (using Page Object Model)
 npm test
-# This will:
-# 1. Start Vite server on :8888 (if not running)
-# 2. Run all tests in visible browsers
+# Same automated flow as step_3:
+# 1. Start Vite server on :8888
+# 2. Run tests in visible browsers
 # 3. Generate HTML report
-# 4. Stop server (if started by test)
-# 5. Open HTML report
+# 4. Stop server
+# 5. Display report
 ```
 
-### Development Mode
+### Test Execution
 
-```bash
-# Start Vite server manually (for development)
-npm run dev
-# Server runs on http://localhost:8888
-
-# In another terminal, run tests
-npm test
-# Will reuse existing server
-```
-
-### Other Test Commands
-
-```bash
-# Run tests in UI mode (interactive)
-npm run test:ui
-
-# Run tests in headed mode (alternative)
-npm run test:headed
-
-# Show existing HTML report
-npm run show-report
-```
+Tests now use clean, readable page object methods:
+- `home.navigateToHome()`
+- `home.addFirstProductToCart()`
+- `cart.navigateToCart()`
+- `checkout.completeCheckoutWithPickup()`
+- `confirmation.verifyCustomerName()`
 
 ## Key Features
 
-### 1. **Automated Server Management**
-   - No need to manually start/stop Vite server
-   - Intelligent server reuse
-   - Automatic cleanup after tests
+### 1. **Custom Test Fixtures**
+```typescript
+// Instead of: test('name', async ({ page }) => { ... })
+// Now: test('name', async ({ home, cart, checkout }) => { ... })
+```
 
-### 2. **Visible Test Execution**
-   - `headless: false` shows browsers during testing
-   - Easy debugging and visual verification
-   - See exactly what tests are doing
+### 2. **Encapsulated Page Logic**
+- All selectors in page objects
+- Reusable methods for common actions
+- Business-focused test code
 
-### 3. **Controlled Parallelization**
-   - Limited to 2 workers
-   - Prevents resource exhaustion
-   - More stable test execution
+### 3. **Inheritance Hierarchy**
+- BasePage provides common functionality
+- Specific page objects extend BasePage
+- Shared utilities across all pages
 
-### 4. **Complete Test Coverage**
-   - All major user flows tested
-   - Edge cases covered
-   - Realistic e2e scenarios
+### 4. **Type Safety**
+- TypeScript support throughout
+- IntelliSense for page object methods
+- Compile-time error checking
 
-### 5. **Professional Test Organization**
-   - Tests grouped by feature
-   - Clear, descriptive test names
-   - Easy to maintain and extend
+### 5. **Maintainable Tests**
+- UI changes only affect page objects
+- Tests remain stable
+- Easy to update and extend
 
 ## Next Steps
 
-Future steps (step_4, step_5, etc.) will progressively:
-1. Implement Page Object Model pattern
-2. Add API testing for products data
-3. Add visual regression testing
-4. Implement test data management
-5. Add performance testing
-6. Create custom test utilities and helpers
+Future steps (step_5, step_6, etc.) will progressively:
+1. Add API testing alongside UI tests
+2. Implement visual regression testing
+3. Add performance testing
+4. Create custom reporters
+5. Implement test data factories
+6. Add component testing
 7. Integrate with CI/CD pipelines
 
 Each subsequent step will include its own PROMPT.md documenting the exact prompts used and the evolution of the test automation suite.
 
 ## Summary
 
-**What Changed from step_1:**
-- Configured automated Vite server management
-- Set fixed port :8888 for consistent testing
-- Added 25+ comprehensive e2e tests
-- Configured visible test execution (headless: false)
-- Limited parallel workers to 2
-- Automated HTML report display
-- Complete test coverage for all TechShop features
+**What Changed from step_3:**
+- Implemented Page Object Model pattern
+- Created 7 page object classes (Base + 6 specific)
+- Custom test fixtures replacing direct page usage
+- Refactored all 22 tests to use page objects
+- Improved test readability and maintainability
+- Reduced test code complexity
 
-**Test Execution:**
-- Single command: `npm test`
-- Automatic server start/stop
-- Visible browsers for debugging
-- Automatic report generation and display
+**Benefits:**
+- **32% reduction** in test code (14KB → 9.7KB)
+- Clear separation of test logic and page interactions
+- Reusable page object methods
+- Type-safe page object interfaces
+- Business-readable test code
 
-The testing infrastructure is now fully automated, making it easy to run comprehensive tests with a single command while maintaining visibility into test execution.
+The test suite now follows industry best practices with the Page Object Model pattern, making tests more maintainable, readable, and scalable.

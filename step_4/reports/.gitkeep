@@ -1,6 +1,0 @@
-# Reports Directory
-
-This directory contains generated test reports:
-- junit.xml - JUnit XML test results
-- custom-report.html - Custom HTML report
-- confluence-report.md - Confluence markdown report

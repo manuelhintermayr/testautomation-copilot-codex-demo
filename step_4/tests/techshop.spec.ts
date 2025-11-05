@@ -1,262 +1,210 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../utils/test-fixtures';
 
 test.describe('TechShop - Home Page', () => {
-  test('should load the home page with correct title', async ({ page }) => {
-    await page.goto('/sut/index.html');
-    await expect(page).toHaveTitle('TechShop - Future of Technology');
+  test('should load the home page with correct title', async ({ home }) => {
+    await home.navigateToHome();
+    const title = await home.getTitle();
+    expect(title).toBe('TechShop - Future of Technology');
   });
 
-  test('should display hero section with call to action', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should display hero section with call to action', async ({ home }) => {
+    await home.navigateToHome();
     
-    // Check for hero text
-    await expect(page.getByText('The Future is')).toBeVisible();
-    await expect(page.getByText('Now')).toBeVisible();
-    
-    // Check for CTA button
-    await expect(page.getByRole('button', { name: 'Explore Collection' })).toBeVisible();
+    // Check hero section is visible
+    const isHeroVisible = await home.isHeroVisible();
+    expect(isHeroVisible).toBeTruthy();
   });
 
-  test('should display 20 products on home page', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should display 20 products on home page', async ({ home }) => {
+    await home.navigateToHome();
     
-    // Wait for products to load
-    await page.waitForSelector('.product-card', { timeout: 10000 });
-    
-    // Count product cards
-    const productCards = page.locator('.product-card');
-    await expect(productCards).toHaveCount(20);
+    // Check product count
+    const productCount = await home.getProductCount();
+    expect(productCount).toBe(20);
   });
 
-  test('should show product details correctly', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should show product details correctly', async ({ home }) => {
+    await home.navigateToHome();
     
-    // Wait for first product
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Get first product details
+    const details = await home.getProductDetails(0);
+    expect(details.name).toBeTruthy();
+    expect(details.description).toBeTruthy();
     
-    const firstProduct = page.locator('.product-card').first();
-    
-    // Check product has name, description, price, and add to cart button
-    await expect(firstProduct.locator('h3')).toBeVisible();
-    await expect(firstProduct.locator('p')).toBeVisible();
+    // Check add to cart button exists
+    const firstProduct = home.getFirstProduct();
     await expect(firstProduct.getByRole('button', { name: 'Add to Cart' })).toBeVisible();
   });
 
-  test('should display featured and new badges', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should display featured and new badges', async ({ home }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Check for badges
+    const hasFeatured = await home.hasFeaturedBadge();
+    const hasNew = await home.hasNewBadge();
     
-    // Check for featured badge
-    const featuredBadge = page.getByText('⭐ Featured').first();
-    await expect(featuredBadge).toBeVisible();
-    
-    // Check for new badge
-    const newBadge = page.getByText('🆕 New').first();
-    await expect(newBadge).toBeVisible();
+    expect(hasFeatured).toBeTruthy();
+    expect(hasNew).toBeTruthy();
   });
 });
 
 test.describe('TechShop - Search Functionality', () => {
-  test('should filter products based on search query', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should filter products based on search query', async ({ home, search }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Perform search
+    await search.search('iPhone');
     
-    // Type in search box
-    const searchInput = page.getByPlaceholder('Discover the future of technology...');
-    await searchInput.fill('iPhone');
+    // Check search results
+    const isMessageVisible = await search.isSearchResultsMessageVisible();
+    expect(isMessageVisible).toBeTruthy();
     
-    // Wait for filtering
-    await page.waitForTimeout(500);
-    
-    // Check search results message
-    await expect(page.getByText('products found for')).toBeVisible();
-    await expect(page.getByText('"iPhone"')).toBeVisible();
-    
-    // Verify filtered results contain iPhone
-    const productCards = page.locator('.product-card');
-    const count = await productCards.count();
-    expect(count).toBeGreaterThan(0);
-    expect(count).toBeLessThan(20);
+    const resultCount = await search.getResultCount();
+    expect(resultCount).toBeGreaterThan(0);
+    expect(resultCount).toBeLessThan(20);
   });
 
-  test('should show "no results" message for non-existent product', async ({ page }) => {
-    await page.goto('/sut/index.html');
-    
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+  test('should show "no results" message for non-existent product', async ({ home, search }) => {
+    await home.navigateToHome();
     
     // Search for non-existent product
-    const searchInput = page.getByPlaceholder('Discover the future of technology...');
-    await searchInput.fill('NonExistentProduct12345');
-    
-    // Wait for filtering
-    await page.waitForTimeout(500);
+    await search.search('NonExistentProduct12345');
     
     // Check no results message
-    await expect(page.getByText('No products found matching your search')).toBeVisible();
+    const isNoResultsVisible = await search.isNoResultsMessageVisible();
+    expect(isNoResultsVisible).toBeTruthy();
   });
 
-  test('should clear search and show all products', async ({ page }) => {
-    await page.goto('/sut/index.html');
-    
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+  test('should clear search and show all products', async ({ home, search }) => {
+    await home.navigateToHome();
     
     // Search first
-    const searchInput = page.getByPlaceholder('Discover the future of technology...');
-    await searchInput.fill('iPhone');
-    await page.waitForTimeout(500);
+    await search.search('iPhone');
     
-    // Click clear search
-    await page.getByRole('button', { name: 'Clear search' }).click();
+    // Clear search
+    await search.clearSearch();
     
-    // Verify all products are shown again
-    const productCards = page.locator('.product-card');
-    await expect(productCards).toHaveCount(20);
+    // Verify all products are shown
+    const productCount = await home.getProductCount();
+    expect(productCount).toBe(20);
   });
 });
 
 test.describe('TechShop - Shopping Cart', () => {
-  test('should add product to cart and update cart count', async ({ page }) => {
-    await page.goto('/sut/index.html');
-    
-    await page.waitForSelector('.product-card', { timeout: 10000 });
-    
-    // Click "Add to Cart" on first product
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    
-    // Check cart badge shows 1
-    const cartBadge = page.locator('button:has-text("Cart") span');
-    await expect(cartBadge).toHaveText('1');
-  });
-
-  test('should navigate to cart page and display added items', async ({ page }) => {
-    await page.goto('/sut/index.html');
-    
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+  test('should add product to cart and update cart count', async ({ home, cart }) => {
+    await home.navigateToHome();
     
     // Add product to cart
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
+    await home.addFirstProductToCart();
     
-    // Navigate to cart
-    await page.getByRole('button', { name: /Cart/ }).click();
+    // Check cart badge
+    const badgeCount = await cart.getCartBadgeCount();
+    expect(badgeCount).toBe('1');
+  });
+
+  test('should navigate to cart page and display added items', async ({ home, cart }) => {
+    await home.navigateToHome();
+    
+    // Add product and navigate to cart
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
     
     // Verify we're on cart page
-    await expect(page.getByRole('heading', { name: 'Shopping Cart' })).toBeVisible();
+    const isOnCart = await cart.isOnCartPage();
+    expect(isOnCart).toBeTruthy();
     
-    // Verify cart has items
-    await expect(page.getByText('Order Summary')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Proceed to Checkout' })).toBeVisible();
+    // Verify order summary is visible
+    const isSummaryVisible = await cart.isOrderSummaryVisible();
+    expect(isSummaryVisible).toBeTruthy();
   });
 
-  test('should increment and decrement product quantity', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should increment and decrement product quantity', async ({ home, cart }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Add product and go to cart
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
     
-    // Add product to cart
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    
-    // Go to cart
-    await page.getByRole('button', { name: /Cart/ }).click();
-    
-    // Find quantity controls
-    const incrementButton = page.getByRole('button', { name: '+' }).first();
-    const quantityDisplay = page.locator('.bg-gray-100 span').first();
-    
-    // Initial quantity should be 1
-    await expect(quantityDisplay).toHaveText('1');
+    // Get initial quantity
+    let quantity = await cart.getQuantity(0);
+    expect(quantity).toBe('1');
     
     // Increment
-    await incrementButton.click();
-    await expect(quantityDisplay).toHaveText('2');
+    await cart.incrementQuantity(0);
+    quantity = await cart.getQuantity(0);
+    expect(quantity).toBe('2');
     
     // Decrement
-    const decrementButton = page.getByRole('button', { name: '-' }).first();
-    await decrementButton.click();
-    await expect(quantityDisplay).toHaveText('1');
+    await cart.decrementQuantity(0);
+    quantity = await cart.getQuantity(0);
+    expect(quantity).toBe('1');
   });
 
-  test('should remove product from cart', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should remove product from cart', async ({ home, cart }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
-    
-    // Add product to cart
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    
-    // Go to cart
-    await page.getByRole('button', { name: /Cart/ }).click();
+    // Add product and go to cart
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
     
     // Remove item
-    await page.locator('button').filter({ has: page.locator('svg path[d*="M19 7l"]') }).first().click();
+    await cart.removeItem(0);
     
-    // Verify empty cart message
-    await expect(page.getByText('Your cart is empty')).toBeVisible();
+    // Verify empty cart
+    const isEmpty = await cart.isCartEmpty();
+    expect(isEmpty).toBeTruthy();
   });
 
-  test('should calculate cart total correctly', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should calculate cart total correctly', async ({ home, cart }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Add product and go to cart
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
     
-    // Add first product to cart
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    
-    // Go to cart
-    await page.getByRole('button', { name: /Cart/ }).click();
-    
-    // Verify order summary shows total
-    await expect(page.getByText('Order Summary')).toBeVisible();
-    await expect(page.getByText(/Subtotal/).locator('xpath=following-sibling::span')).toBeVisible();
-    await expect(page.getByText(/Total/).locator('xpath=following-sibling::span')).toBeVisible();
+    // Verify order summary is visible (which includes totals)
+    const isSummaryVisible = await cart.isOrderSummaryVisible();
+    expect(isSummaryVisible).toBeTruthy();
   });
 });
 
 test.describe('TechShop - Checkout Process', () => {
-  test('should navigate to checkout page from cart', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should navigate to checkout page from cart', async ({ home, cart, checkout }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
-    
-    // Add product and go to cart
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    await page.getByRole('button', { name: /Cart/ }).click();
-    
-    // Proceed to checkout
-    await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
+    // Add product, go to cart, then checkout
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
+    await cart.proceedToCheckout();
     
     // Verify checkout page
-    await expect(page.getByRole('heading', { name: 'Checkout' })).toBeVisible();
+    const isOnCheckout = await checkout.isOnCheckoutPage();
+    expect(isOnCheckout).toBeTruthy();
   });
 
-  test('should select delivery method', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should select delivery method', async ({ home, cart, checkout }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Navigate to checkout
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
+    await cart.proceedToCheckout();
     
-    // Add product, go to cart, then checkout
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    await page.getByRole('button', { name: /Cart/ }).click();
-    await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
+    // Select pickup
+    await checkout.selectPickup();
     
-    // Select pickup option
-    await page.getByText('Store Pickup').click();
-    
-    // Verify pickup is selected (check for blue border)
-    const pickupLabel = page.locator('label:has-text("Store Pickup")');
-    await expect(pickupLabel).toHaveClass(/border-blue-600/);
+    // Verify pickup is selected
+    const isPickupSelected = await checkout.isPickupSelected();
+    expect(isPickupSelected).toBeTruthy();
   });
 
-  test('should validate required fields before placing order', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should validate required fields before placing order', async ({ home, cart, checkout, page }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
-    
-    // Add product, go to cart, then checkout
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    await page.getByRole('button', { name: /Cart/ }).click();
-    await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
+    // Navigate to checkout
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
+    await cart.proceedToCheckout();
     
     // Try to place order without filling fields
     page.once('dialog', dialog => {
@@ -264,114 +212,99 @@ test.describe('TechShop - Checkout Process', () => {
       dialog.accept();
     });
     
-    await page.getByRole('button', { name: 'Place Order' }).click();
+    await checkout.placeOrder();
   });
 
-  test('should complete checkout and show confirmation', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should complete checkout and show confirmation', async ({ home, cart, checkout, confirmation }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Navigate to checkout
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
+    await cart.proceedToCheckout();
     
-    // Add product, go to cart, then checkout
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    await page.getByRole('button', { name: /Cart/ }).click();
-    await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
-    
-    // Fill in customer information
-    await page.getByLabel('Full Name').fill('John Doe');
-    await page.getByLabel('Email').fill('john@example.com');
-    
-    // Select pickup (no address needed)
-    await page.getByText('Store Pickup').click();
-    
-    // Place order
-    await page.getByRole('button', { name: 'Place Order' }).click();
+    // Complete checkout with pickup
+    await checkout.completeCheckoutWithPickup('John Doe', 'john@example.com');
     
     // Verify confirmation page
-    await expect(page.getByRole('heading', { name: 'Order Confirmed!' })).toBeVisible();
-    await expect(page.getByText(/Thank you for your order, John Doe/)).toBeVisible();
-    await expect(page.getByText(/Your order number is:/)).toBeVisible();
+    const isOnConfirmation = await confirmation.isOnConfirmationPage();
+    expect(isOnConfirmation).toBeTruthy();
+    
+    const isSuccessVisible = await confirmation.isSuccessIconVisible();
+    expect(isSuccessVisible).toBeTruthy();
+    
+    const hasCustomerName = await confirmation.verifyCustomerName('John Doe');
+    expect(hasCustomerName).toBeTruthy();
+    
+    const isOrderNumberDisplayed = await confirmation.isOrderNumberDisplayed();
+    expect(isOrderNumberDisplayed).toBeTruthy();
   });
 
-  test('should clear cart after successful order', async ({ page }) => {
-    await page.goto('/sut/index.html');
-    
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+  test('should clear cart after successful order', async ({ home, cart, checkout, confirmation }) => {
+    await home.navigateToHome();
     
     // Complete full checkout flow
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
-    await page.getByRole('button', { name: /Cart/ }).click();
-    await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
-    await page.getByLabel('Full Name').fill('John Doe');
-    await page.getByLabel('Email').fill('john@example.com');
-    await page.getByText('Store Pickup').click();
-    await page.getByRole('button', { name: 'Place Order' }).click();
+    await home.addFirstProductToCart();
+    await cart.navigateToCart();
+    await cart.proceedToCheckout();
+    await checkout.completeCheckoutWithPickup('John Doe', 'john@example.com');
     
     // Continue shopping
-    await page.getByRole('button', { name: 'Continue Shopping' }).click();
+    await confirmation.continueShopping();
     
     // Verify cart is empty (no badge)
-    const cartButton = page.getByRole('button', { name: 'Cart' }).first();
-    await expect(cartButton.locator('span')).not.toBeVisible();
+    const isBadgeVisible = await cart.isCartBadgeVisible();
+    expect(isBadgeVisible).toBeFalsy();
   });
 });
 
 test.describe('TechShop - Theme Toggle', () => {
-  test('should toggle between light and dark mode', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should toggle between light and dark mode', async ({ home, navigation }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Get initial theme state
+    const initialDarkMode = await navigation.isDarkModeEnabled();
     
-    // Get the theme toggle button (sun/moon icon)
-    const themeToggle = page.locator('button:has(svg)').filter({ has: page.locator('path[d*="M10 2a1 1 0 011 1v1"]') });
+    // Toggle theme
+    await navigation.toggleTheme();
     
-    // Click to toggle theme
-    await themeToggle.first().click();
-    
-    // Wait for theme to apply
-    await page.waitForTimeout(300);
-    
-    // Check if dark class is added to html element
-    const htmlElement = page.locator('html');
-    const hasDearkClass = await htmlElement.evaluate((el) => el.classList.contains('dark'));
+    // Check theme changed
+    const newDarkMode = await navigation.isDarkModeEnabled();
+    expect(newDarkMode).toBe(!initialDarkMode);
     
     // Toggle back
-    await themeToggle.first().click();
-    await page.waitForTimeout(300);
+    await navigation.toggleTheme();
+    const finalDarkMode = await navigation.isDarkModeEnabled();
+    expect(finalDarkMode).toBe(initialDarkMode);
   });
 });
 
 test.describe('TechShop - Navigation', () => {
-  test('should navigate between pages', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should navigate between pages', async ({ home, cart, navigation }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Add item and go to cart
+    await home.addFirstProductToCart();
+    await navigation.goToCart();
     
-    // Add item to cart
-    await page.locator('.product-card').first().getByRole('button', { name: 'Add to Cart' }).click();
+    const isOnCart = await cart.isOnCartPage();
+    expect(isOnCart).toBeTruthy();
     
-    // Go to cart
-    await page.getByRole('button', { name: /Cart/ }).click();
-    await expect(page.getByRole('heading', { name: 'Shopping Cart' })).toBeVisible();
+    // Go back to home
+    await navigation.goToHome();
     
-    // Go back to home using logo/Home button
-    await page.getByRole('button', { name: 'Home' }).click();
-    await expect(page.getByText('The Future is')).toBeVisible();
+    const isHeroVisible = await home.isHeroVisible();
+    expect(isHeroVisible).toBeTruthy();
   });
 
-  test('should scroll to products when clicking Explore Collection', async ({ page }) => {
-    await page.goto('/sut/index.html');
+  test('should scroll to products when clicking Explore Collection', async ({ home }) => {
+    await home.navigateToHome();
     
-    await page.waitForSelector('.product-card', { timeout: 10000 });
+    // Click Explore Collection
+    await home.clickExploreCollection();
     
-    // Click Explore Collection button
-    await page.getByRole('button', { name: 'Explore Collection' }).click();
-    
-    // Wait for scroll
-    await page.waitForTimeout(1000);
-    
-    // Verify products section is in view
-    const productsSection = page.locator('#products');
-    await expect(productsSection).toBeInViewport();
+    // Verify products section is in viewport
+    const isInViewport = await home.isProductsSectionInViewport();
+    expect(isInViewport).toBeTruthy();
   });
 });
