@@ -1,5 +1,9 @@
 # Step 3: Comprehensive E2E Testing with Manual Server Management
 
+## Preview
+
+![TechShop Step 3 - Playwright Testing](preview.png)
+
 ## Overview
 
 This step implements a complete end-to-end test suite for the TechShop application with manual server management and optimized test execution focused on Chromium browser.

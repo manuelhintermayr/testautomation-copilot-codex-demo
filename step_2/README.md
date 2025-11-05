@@ -1,5 +1,9 @@
 # Step 2: Modular Application Architecture
 
+## Preview
+
+![TechShop Step 2 - Modular Architecture](preview.png)
+
 ## Overview
 
 This step transforms the monolithic single-file application from step_1 into a modular, well-organized architecture with separated concerns.

@@ -1,5 +1,11 @@
 # Step 1: Professional TechShop with Vite & Dark Mode
 
+## Preview
+
+![Professional TechShop Preview](preview.png)
+
+*Professional e-commerce platform with modern design, dark mode support, and comprehensive product catalog featuring 20 premium tech products.*
+
 ## Overview
 This step transforms the basic e-commerce site from step_0 into a professional, futuristic shopping platform with modern development tooling and enhanced user experience.
 

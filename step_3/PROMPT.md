@@ -1,5 +1,9 @@
 # Step 3: Prompts and Implementation
 
+## Preview
+
+![TechShop Step 3 - E2E Test Execution](preview.png)
+
 This document describes the prompts used to create this step and the results achieved.
 
 ## Original Problem Statement / Prompt

@@ -1,5 +1,9 @@
 # Step 2: Prompts and Implementation
 
+## Preview
+
+![TechShop Step 2 - Modular File Structure](preview.png)
+
 This document describes the prompts used to create this step and the results achieved.
 
 ## Original Problem Statement / Prompt

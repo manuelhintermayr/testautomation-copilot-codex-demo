@@ -1,5 +1,15 @@
 # Test Automation with Copilot/Codex Demo
 
+## Visual Overview
+
+![Step 0 - Basic E-commerce](step_0/preview.png) | ![Step 1 - Professional TechShop](step_1/preview.png) | ![Step 2 - Modular Architecture](step_2/preview.png)
+:-------------------------:|:-------------------------:|:-------------------------:
+**Step 0:** Basic E-commerce | **Step 1:** Professional TechShop | **Step 2:** Modular Architecture
+
+![Step 3 - E2E Testing](step_3/preview.png) | ![Step 4 - HTML Report](step_4/preview_html.png) | ![Step 4 - Confluence Report](step_4/preview_confluence.png)
+:-------------------------:|:-------------------------:|:-------------------------:
+**Step 3:** E2E Testing | **Step 4:** Custom HTML Report | **Step 4:** Confluence Report
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -33,11 +43,17 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
 ## Solution Results:
 
 - **step_0**: Initial Playwright project setup and System Under Test (SUT)
+  
+  ![Step 0 Preview](step_0/preview.png)
+  
   - Contains the `sut/` subfolder with a fully functional e-commerce webshop built with Vue.js 3 and Tailwind CSS
   - Includes Playwright test framework configuration
   - See `step_0/PROMPT.md` for detailed prompts and implementation notes
 
 - **step_1**: Professional TechShop with Vite & Dark Mode
+  
+  ![Step 1 Preview](step_1/preview.png)
+  
   - Complete visual redesign with futuristic, sales-optimized design
   - Vite development server integration for modern development workflow
   - Dark/Light mode implementation with system preference detection
@@ -46,6 +62,9 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - See `step_1/PROMPT.md` for detailed implementation and improvements
 
 - **step_2**: Modular Architecture & Separation of Concerns
+  
+  ![Step 2 Preview](step_2/preview.png)
+  
   - Refactored monolithic HTML into modular file structure
   - Separated data layer (products.json), presentation layer (styles.css), logic layer (app.js)
   - 52% HTML reduction while maintaining full functionality
@@ -54,6 +73,9 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - See `step_2/PROMPT.md` for architectural transformation details
 
 - **step_3**: Comprehensive E2E Testing with Manual Server Management
+  
+  ![Step 3 Preview](step_3/preview.png)
+  
   - Complete Playwright test suite with 22+ end-to-end tests covering all functionality
   - Manual server management for full developer control
   - Chromium-only testing for fast development cycles
@@ -63,6 +85,11 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - See `step_3/PROMPT.md` for testing implementation and configuration details
 
 - **step_4**: JUnit Reporting with Custom HTML & Confluence Reports
+  
+  ![Step 4 HTML Report Preview](step_4/preview_html.png)
+  
+  ![Step 4 Confluence Report Preview](step_4/preview_confluence.png)
+  
   - Added JUnit XML reporter for CI/CD integration alongside existing HTML reporter
   - Custom Node.js report generator parsing junit.xml to create beautiful HTML reports
   - Professional styled reports with gradients, cards, and comprehensive statistics

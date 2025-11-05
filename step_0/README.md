@@ -1,5 +1,9 @@
 # Step 0: Playwright Project Initialization
 
+## Preview
+
+![TechShop Step 0 - Basic E-commerce Application](preview.png)
+
 ## Prompt Used
 
 ```

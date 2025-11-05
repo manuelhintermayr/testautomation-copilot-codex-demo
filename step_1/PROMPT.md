@@ -1,5 +1,11 @@
 # Step 1: Prompts and Implementation
 
+## Preview
+
+![Professional TechShop Preview](preview.png)
+
+*Transformed e-commerce platform with futuristic design, glass morphism effects, and comprehensive dark mode implementation.*
+
 This document describes the prompts used to create this step and the results achieved.
 
 ## Original Problem Statement / Prompt

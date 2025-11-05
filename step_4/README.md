@@ -1,5 +1,13 @@
 # Step 4: JUnit Reporting with Custom HTML & Confluence Reports
 
+## Preview
+
+### Custom HTML Report
+![TechShop Step 4 - Custom HTML Report](preview_html.png)
+
+### Confluence Markdown Report
+![TechShop Step 4 - Confluence Report](preview_confluence.png)
+
 ## Overview
 
 This step extends the comprehensive E2E test suite with JUnit XML reporting and custom report generation. It includes beautiful HTML reports and Confluence-compatible markdown reports generated from JUnit XML results.

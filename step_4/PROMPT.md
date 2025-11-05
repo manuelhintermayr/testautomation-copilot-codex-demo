@@ -1,5 +1,13 @@
 # Step 4: Prompts and Implementation
 
+## Preview
+
+### Custom HTML Report
+![TechShop Step 4 - HTML Report Generation](preview_html.png)
+
+### Confluence Markdown Report
+![TechShop Step 4 - Confluence Report Generation](preview_confluence.png)
+
 This document describes the prompts used to create this step and the results achieved.
 
 ## Original Problem Statement / Prompt
