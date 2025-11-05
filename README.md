@@ -10,6 +10,10 @@
 :-------------------------:|:-------------------------:|:-------------------------:
 **Step 3:** E2E Testing | **Step 4:** Custom HTML Report | **Step 4:** Confluence Report
 
+![Step 5 - Page Object Model](step_5/preview.png) |  | 
+:-------------------------:|:-------------------------:|:-------------------------:
+**Step 5:** Page Object Model & CI/CD |  | 
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
@@ -97,6 +101,18 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - Multiple report formats: JUnit XML, Custom HTML, Confluence markdown
   - Automated npm scripts for complete testing and reporting workflow
   - See `step_4/PROMPT.md` for reporting implementation and custom generator details
+
+- **step_5**: Page Object Model Pattern & CI/CD Integration
+  
+  ![Step 5 Preview](step_5/preview.png)
+  
+  - Implemented Page Object Model (POM) design pattern for maintainable test automation
+  - Created modular page object classes in utils/ folder with BasePage inheritance
+  - Custom test fixtures enabling clean test syntax: `test('name', async ({ home, cart, checkout }) => { ... })`
+  - Separated business logic from technical implementation details
+  - GitHub Actions CI/CD workflow for automated testing on push/PR
+  - Enhanced test readability and maintainability for enterprise-scale automation
+  - See `step_5/PROMPT.md` for POM implementation and architectural improvements
 
 
 ## Purpose

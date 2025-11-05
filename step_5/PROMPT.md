@@ -1,5 +1,11 @@
 # Step 5: Prompts and Implementation
 
+## Preview
+
+![Page Object Model Preview](preview.png)
+
+*Professional test automation architecture with Page Object Model pattern, enabling maintainable and enterprise-ready test suites.*
+
 This document describes the prompts used to create this step and the results achieved.
 
 ## Original Problem Statement / Prompt

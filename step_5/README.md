@@ -1,5 +1,11 @@
 # Step 5: Page Object Model Pattern for Maintainable Tests
 
+## Preview
+
+![Page Object Model Preview](preview.png)
+
+*Enterprise-ready test automation with Page Object Model pattern, custom fixtures, and CI/CD integration for maintainable and scalable tests.*
+
 ## Overview
 
 This step implements the Page Object Model (POM) design pattern to create maintainable, readable, and scalable test automation.
