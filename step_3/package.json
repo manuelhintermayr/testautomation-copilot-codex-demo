@@ -7,7 +7,9 @@
     "dev": "vite --open sut/index.html --port 8888",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "playwright test && playwright show-report",
+    "test": "playwright test",
+    "test:report": "playwright test && playwright show-report",
+    "test:ci": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "show-report": "playwright show-report"

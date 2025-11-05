@@ -45,6 +45,23 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - Enhanced UX with glass morphism effects, animations, and professional typography
   - See `step_1/PROMPT.md` for detailed implementation and improvements
 
+- **step_2**: Modular Architecture & Separation of Concerns
+  - Refactored monolithic HTML into modular file structure
+  - Separated data layer (products.json), presentation layer (styles.css), logic layer (app.js)
+  - 52% HTML reduction while maintaining full functionality
+  - Better maintainability and testability through separation of concerns
+  - Enhanced Tailwind configuration with custom theme
+  - See `step_2/PROMPT.md` for architectural transformation details
+
+- **step_3**: Comprehensive E2E Testing with Manual Server Management
+  - Complete Playwright test suite with 22+ end-to-end tests covering all functionality
+  - Manual server management for full developer control
+  - Chromium-only testing for fast development cycles
+  - Windows PowerShell optimized commands and workflow
+  - Comprehensive test coverage: Home, Search, Cart, Checkout, Navigation, Theme Toggle
+  - Visible browser execution (headless: false) for easy debugging
+  - See `step_3/PROMPT.md` for testing implementation and configuration details
+
 
 ## Purpose
 

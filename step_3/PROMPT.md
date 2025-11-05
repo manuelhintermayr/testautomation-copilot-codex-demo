@@ -8,9 +8,28 @@ This document describes the prompts used to create this step and the results ach
 
 > Danke. Jetzt erstelle bitte den "step_3"-folder, wo auch alles von step_1" rüberkopiert wird und dann, du kennst es, die md files angepasst werden. Ich will, nun dass du in playwright bei step_3 bitte alle tests für den onlineshop stattfinden nur "npm run test". wenn der command ausgeführt wird, werden auf localhost:8888 die tests ausgeführt. dazu muss erst mit vite der server gestartet werden, wenn er nicht gerade schon läuft und dann erst die tests ausgeführt werden. anschließend wird der server herunter gefahren und dann erst der playwright html report angezeigt. Bitte mache dazu alle headless:false und maximal 2 server gleichzeitig laufen. vite sut server soll auch :8888 konfiguriert werden.
 
-**English Translation:**
+**Updated Requirements (During Implementation):**
 
-> Thanks. Now please create the "step_3" folder, where everything from step_1 is copied over and then, you know it, the md files are adapted. I want Playwright in step_3 to have all tests for the online shop happen with just "npm run test". When the command is executed, the tests are run on localhost:8888. For this, the Vite server must first be started if it's not already running, and only then are the tests executed. Afterwards, the server is shut down and only then is the Playwright HTML report displayed. Please make all headless:false and a maximum of 2 workers running simultaneously. The Vite SUT server should also be configured to :8888.
+> npm run test sollte zuerst den server starten und dann die tests ausführen und dann erst das html file ausführen. ich glaube aber dieses && funktioniert nur bei linux/unix, nicht bei windows so richtig, oder?
+
+> Danke. Bitte passe nun das prompt.md und readme.md file im step_3 ordner entsprechend an (so wie auch das readme.md im root-folder)
+
+**Final Requirements:**
+
+> Error: Process from config.webServer was not able to start. Exit code: 1
+> Kannst du das bittete wieder rausholen? ich muss selbst händisch den server starten. playwright test führt nur die tests aus
+
+> Danke. Deaktiviere nun firefox und webkit die projekte
+
+## Implementation Summary
+
+### Final Configuration
+- **Manual server management** - Developer starts server manually
+- **Chromium-only testing** - Firefox and WebKit disabled
+- **Windows PowerShell compatibility** - Separate commands instead of && chains
+- **Port 8888** - Fixed port for consistent development
+- **Visible browser execution** - headless: false for debugging
+- **Limited workers** - Maximum 2 parallel test executions
 
 ## Tasks Breakdown
 
