@@ -1,46 +1,58 @@
-<testsuites id="" name="" tests="21" failures="0" skipped="0" errors="0" time="39.559219">
-<testsuite name="techshop.spec.ts" timestamp="2025-11-05T16:09:41.263Z" hostname="chromium" tests="21" failures="0" skipped="0" time="36.183" errors="0">
-<testcase name="TechShop - Home Page › should load the home page with correct title" classname="techshop.spec.ts" time="1.53">
+<testsuites id="" name="" tests="27" failures="0" skipped="0" errors="0" time="39.799714">
+<testsuite name="techshop.spec.ts" timestamp="2025-11-05T16:49:08.935Z" hostname="chromium" tests="27" failures="0" skipped="0" time="36.203" errors="0">
+<testcase name="TechShop - Home Page › should load the home page with correct title" classname="techshop.spec.ts" time="1.971">
 </testcase>
-<testcase name="TechShop - Home Page › should display hero section with call to action" classname="techshop.spec.ts" time="1.358">
+<testcase name="TechShop - Home Page › should display hero section with call to action" classname="techshop.spec.ts" time="1.233">
 </testcase>
-<testcase name="TechShop - Home Page › should display 20 products on home page" classname="techshop.spec.ts" time="1.266">
+<testcase name="TechShop - Home Page › should display 20 products on home page" classname="techshop.spec.ts" time="0.872">
 </testcase>
-<testcase name="TechShop - Home Page › should show product details correctly" classname="techshop.spec.ts" time="1.527">
+<testcase name="TechShop - Home Page › should show product details correctly" classname="techshop.spec.ts" time="0.967">
 </testcase>
-<testcase name="TechShop - Home Page › should display featured and new badges" classname="techshop.spec.ts" time="1.523">
+<testcase name="TechShop - Home Page › should display featured and new badges" classname="techshop.spec.ts" time="0.912">
 </testcase>
-<testcase name="TechShop - Search Functionality › should filter products based on search query" classname="techshop.spec.ts" time="1.966">
+<testcase name="TechShop - Search Functionality › should filter products based on search query" classname="techshop.spec.ts" time="1.575">
 </testcase>
-<testcase name="TechShop - Search Functionality › should show &quot;no results&quot; message for non-existent product" classname="techshop.spec.ts" time="1.867">
+<testcase name="TechShop - Search Functionality › should show &quot;no results&quot; message for non-existent product" classname="techshop.spec.ts" time="1.442">
 </testcase>
-<testcase name="TechShop - Search Functionality › should clear search and show all products" classname="techshop.spec.ts" time="1.81">
+<testcase name="TechShop - Search Functionality › should clear search and show all products" classname="techshop.spec.ts" time="1.587">
 </testcase>
-<testcase name="TechShop - Shopping Cart › should add product to cart and update cart count" classname="techshop.spec.ts" time="1.427">
+<testcase name="TechShop - Shopping Cart › should add product to cart and update cart count" classname="techshop.spec.ts" time="0.963">
 </testcase>
-<testcase name="TechShop - Shopping Cart › should navigate to cart page and display added items" classname="techshop.spec.ts" time="1.534">
+<testcase name="TechShop - Shopping Cart › should navigate to cart page and display added items" classname="techshop.spec.ts" time="1.062">
 </testcase>
-<testcase name="TechShop - Shopping Cart › should increment and decrement product quantity" classname="techshop.spec.ts" time="1.77">
+<testcase name="TechShop - Shopping Cart › should increment and decrement product quantity" classname="techshop.spec.ts" time="1.148">
 </testcase>
-<testcase name="TechShop - Shopping Cart › should remove product from cart" classname="techshop.spec.ts" time="1.795">
+<testcase name="TechShop - Shopping Cart › should remove product from cart" classname="techshop.spec.ts" time="1.166">
 </testcase>
-<testcase name="TechShop - Shopping Cart › should calculate cart total correctly" classname="techshop.spec.ts" time="1.621">
+<testcase name="TechShop - Shopping Cart › should calculate cart total correctly" classname="techshop.spec.ts" time="1.217">
 </testcase>
-<testcase name="TechShop - Checkout Process › should navigate to checkout page from cart" classname="techshop.spec.ts" time="1.942">
+<testcase name="TechShop - Checkout Process › should navigate to checkout page from cart" classname="techshop.spec.ts" time="1.25">
 </testcase>
-<testcase name="TechShop - Checkout Process › should select delivery method" classname="techshop.spec.ts" time="1.491">
+<testcase name="TechShop - Checkout Process › should select delivery method" classname="techshop.spec.ts" time="1.149">
 </testcase>
-<testcase name="TechShop - Checkout Process › should validate required fields before placing order" classname="techshop.spec.ts" time="1.673">
+<testcase name="TechShop - Checkout Process › should validate required fields before placing order" classname="techshop.spec.ts" time="1.536">
 </testcase>
-<testcase name="TechShop - Checkout Process › should complete checkout and show confirmation" classname="techshop.spec.ts" time="1.593">
+<testcase name="TechShop - Checkout Process › should complete checkout and show confirmation" classname="techshop.spec.ts" time="1.408">
 </testcase>
-<testcase name="TechShop - Checkout Process › should clear cart after successful order" classname="techshop.spec.ts" time="1.78">
+<testcase name="TechShop - Checkout Process › should clear cart after successful order" classname="techshop.spec.ts" time="1.492">
 </testcase>
-<testcase name="TechShop - Theme Toggle › should toggle between light and dark mode" classname="techshop.spec.ts" time="2.108">
+<testcase name="TechShop - Theme Toggle › should toggle between light and dark mode" classname="techshop.spec.ts" time="1.781">
 </testcase>
-<testcase name="TechShop - Navigation › should navigate between pages" classname="techshop.spec.ts" time="1.445">
+<testcase name="TechShop - Navigation › should navigate between pages" classname="techshop.spec.ts" time="1.18">
 </testcase>
-<testcase name="TechShop - Navigation › should scroll to products when clicking Explore Collection" classname="techshop.spec.ts" time="3.157">
+<testcase name="TechShop - Navigation › should scroll to products when clicking Explore Collection" classname="techshop.spec.ts" time="2.944">
+</testcase>
+<testcase name="TechShop - Drone Delivery › should show drone delivery option when all items support it" classname="techshop.spec.ts" time="1.155">
+</testcase>
+<testcase name="TechShop - Drone Delivery › should disable drone delivery when cart contains unsupported items" classname="techshop.spec.ts" time="1.281">
+</testcase>
+<testcase name="TechShop - Drone Delivery › should prevent checkout with drone delivery for unsupported items" classname="techshop.spec.ts" time="1.32">
+</testcase>
+<testcase name="TechShop - Drone Delivery › should successfully complete checkout with drone delivery for supported items" classname="techshop.spec.ts" time="1.338">
+</testcase>
+<testcase name="TechShop - Drone Delivery › should show correct drone delivery fee" classname="techshop.spec.ts" time="1.143">
+</testcase>
+<testcase name="TechShop - Drone Delivery › should show FREE for other delivery methods" classname="techshop.spec.ts" time="1.111">
 </testcase>
 </testsuite>
 </testsuites>

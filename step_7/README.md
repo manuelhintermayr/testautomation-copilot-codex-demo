@@ -1,5 +1,11 @@
 # Step 7: Drone Delivery Feature with Comprehensive Testing
 
+## Preview
+
+![Drone Delivery Feature Preview](preview.png)
+
+*Enhanced e-commerce platform with intelligent drone delivery feature, supporting 13 of 20 products with smart validation and comprehensive test coverage.*
+
 ## Overview
 
 This step extends the TechShop application with a drone delivery option, including product-level support configuration, smart validation, and comprehensive test coverage.

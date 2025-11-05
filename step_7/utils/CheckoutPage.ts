@@ -104,6 +104,14 @@ export class CheckoutPage extends BasePage {
   }
 
   /**
+   * Try to click on drone delivery option (even if disabled)
+   */
+  async tryToSelectDroneDelivery() {
+    // Force click even if disabled to test that it doesn't get selected
+    await this.droneMethodLabel.click({ force: true });
+  }
+
+  /**
    * Fill customer information
    */
   async fillCustomerInfo(name: string, email: string, address?: string) {

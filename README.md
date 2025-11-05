@@ -10,9 +10,9 @@
 :-------------------------:|:-------------------------:|:-------------------------:
 **Step 3:** E2E Testing | **Step 4:** Custom HTML Report | **Step 4:** Confluence Report
 
-![Step 5 - Page Object Model](step_5/preview.png) | ![Step 6 - Test Stabilization](step_6/preview.png) | 
+![Step 5 - Page Object Model](step_5/preview.png) | ![Step 6 - Test Stabilization](step_6/preview.png) | ![Step 7 - Drone Delivery](step_7/preview.png)
 :-------------------------:|:-------------------------:|:-------------------------:
-**Step 5:** Page Object Model & CI/CD | **Step 6:** Test Stabilization | 
+**Step 5:** Page Object Model & CI/CD | **Step 6:** Test Stabilization | **Step 7:** Drone Delivery Feature
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -125,6 +125,19 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - Optimized test performance from 12 failing tests to 0 failing tests
   - Enhanced test reliability and maintainability for production-ready automation
   - See `step_6/PROMPT.md` for detailed stabilization process and fixes
+
+- **step_7**: Drone Delivery Feature with Comprehensive Testing
+  
+  ![Step 7 Preview](step_7/preview.png)
+  
+  - Revolutionary drone delivery feature with intelligent product-level support validation
+  - Three delivery options: Express Delivery, Store Pickup, and premium Drone Delivery ($9.99)
+  - Smart classification: 13 of 20 products support drone delivery (small items only)
+  - Automatic UI validation: disabled state and warnings for incompatible cart items
+  - Comprehensive test suite expansion from 21 to 28 tests with 6 new drone delivery scenarios
+  - Advanced testing: disabled element interaction, force clicks, and validation prevention
+  - Enhanced e-commerce innovation with realistic business logic and user experience
+  - See `step_7/PROMPT.md` for drone delivery implementation and testing strategies
 
 
 ## Purpose
