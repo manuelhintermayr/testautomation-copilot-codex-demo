@@ -1,0 +1,33 @@
+{
+  "name": "step_7",
+  "version": "1.0.0",
+  "description": "TechShop SUT with drone delivery feature and comprehensive test coverage",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --open sut/index.html --port 8888",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "playwright test && playwright show-report",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "show-report": "playwright show-report",
+    "generate-reports": "node report-generator.js",
+    "test:full": "npm run test && npm run generate-reports",
+    "open-html-report": "start reports/custom-report.html"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "e-commerce",
+    "vite",
+    "page-object-model"
+  ],
+  "author": "manuelhintermayr",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "vite": "^5.0.0",
+    "xml2js": "^0.6.2"
+  }
+}

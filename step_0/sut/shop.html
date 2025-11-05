@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechShop - Your One-Stop Electronics Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- Navigation -->
+        <nav class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <h1 class="text-2xl font-bold cursor-pointer" @click="currentPage = 'home'">🛒 TechShop</h1>
+                    </div>
+                    <div class="flex-1 max-w-xl mx-8">
+                        <div class="relative">
+                            <input 
+                                v-model="searchQuery" 
+                                @input="performSearch"
+                                type="text" 
+                                placeholder="Search for products..." 
+                                class="w-full px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                            >
+                            <svg class="absolute right-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <button @click="currentPage = 'home'" class="hover:text-blue-200 transition">Home</button>
+                        <button @click="currentPage = 'cart'" class="relative hover:text-blue-200 transition">
+                            Cart
+                            <span v-if="cartItemCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                                {{ cartItemCount }}
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Home Page -->
+        <div v-if="currentPage === 'home'" class="container mx-auto px-4 py-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Products</h2>
+            
+            <!-- Search Results Message -->
+            <div v-if="searchQuery" class="mb-6 bg-blue-50 border-l-4 border-blue-500 p-4">
+                <p class="text-blue-700">
+                    Showing {{ displayedProducts.length }} result(s) for "{{ searchQuery }}"
+                    <button @click="clearSearch" class="ml-4 text-blue-600 underline hover:text-blue-800">Clear search</button>
+                </p>
+            </div>
+
+            <div v-if="displayedProducts.length === 0" class="text-center py-12">
+                <p class="text-gray-500 text-lg">No products found matching your search.</p>
+            </div>
+
+            <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div v-for="product in displayedProducts" :key="product.id" 
+                     class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <span class="text-6xl">{{ product.image }}</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ product.name }}</h3>
+                        <p class="text-gray-600 mb-4">{{ product.description }}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold text-blue-600">${{ product.price.toFixed(2) }}</span>
+                            <button 
+                                @click="addToCart(product)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors duration-200 font-semibold">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Page -->
+        <div v-if="currentPage === 'cart'" class="container mx-auto px-4 py-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Shopping Cart</h2>
+            
+            <div v-if="cart.length === 0" class="text-center py-12">
+                <p class="text-gray-500 text-lg mb-4">Your cart is empty</p>
+                <button @click="currentPage = 'home'" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
+                    Continue Shopping
+                </button>
+            </div>
+
+            <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div v-for="item in cart" :key="item.product.id" 
+                         class="bg-white rounded-lg shadow-md p-6 mb-4 flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-4xl">{{ item.product.image }}</span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-800">{{ item.product.name }}</h3>
+                                <p class="text-gray-600">${{ item.product.price.toFixed(2) }} each</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-1">
+                                <button @click="decrementQuantity(item.product.id)" class="text-gray-600 hover:text-gray-800 font-bold text-xl">-</button>
+                                <span class="text-gray-800 font-semibold w-8 text-center">{{ item.quantity }}</span>
+                                <button @click="incrementQuantity(item.product.id)" class="text-gray-600 hover:text-gray-800 font-bold text-xl">+</button>
+                            </div>
+                            <span class="text-lg font-bold text-gray-800 w-24 text-right">${{ (item.product.price * item.quantity).toFixed(2) }}</span>
+                            <button @click="removeFromCart(item.product.id)" class="text-red-500 hover:text-red-700 ml-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h3>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between text-gray-600">
+                                <span>Subtotal</span>
+                                <span>${{ cartTotal.toFixed(2) }}</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Shipping</span>
+                                <span>$0.00</span>
+                            </div>
+                            <div class="border-t pt-2 flex justify-between font-bold text-gray-800 text-lg">
+                                <span>Total</span>
+                                <span>${{ cartTotal.toFixed(2) }}</span>
+                            </div>
+                        </div>
+                        <button 
+                            @click="currentPage = 'checkout'"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Page -->
+        <div v-if="currentPage === 'checkout'" class="container mx-auto px-4 py-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Checkout</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Delivery Method</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3 p-4 border-2 rounded-lg cursor-pointer transition-all"
+                                   :class="deliveryMethod === 'delivery' ? 'border-blue-600 bg-blue-50' : 'border-gray-200 hover:border-gray-300'">
+                                <input type="radio" v-model="deliveryMethod" value="delivery" class="text-blue-600">
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">Home Delivery</div>
+                                    <div class="text-sm text-gray-600">Delivered to your doorstep in 3-5 business days</div>
+                                </div>
+                                <span class="font-semibold text-gray-800">Free</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-4 border-2 rounded-lg cursor-pointer transition-all"
+                                   :class="deliveryMethod === 'pickup' ? 'border-blue-600 bg-blue-50' : 'border-gray-200 hover:border-gray-300'">
+                                <input type="radio" v-model="deliveryMethod" value="pickup" class="text-blue-600">
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-800">Store Pickup</div>
+                                    <div class="text-sm text-gray-600">Pick up from our store within 24 hours</div>
+                                </div>
+                                <span class="font-semibold text-gray-800">Free</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Full Name</label>
+                                <input v-model="customerInfo.name" type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Email</label>
+                                <input v-model="customerInfo.email" type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="john@example.com">
+                            </div>
+                            <div v-if="deliveryMethod === 'delivery'">
+                                <label class="block text-gray-700 mb-2">Delivery Address</label>
+                                <textarea v-model="customerInfo.address" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="3" placeholder="123 Main St, City, Country"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h3>
+                        <div class="space-y-2 mb-4">
+                            <div v-for="item in cart" :key="item.product.id" class="flex justify-between text-sm text-gray-600">
+                                <span>{{ item.product.name }} x{{ item.quantity }}</span>
+                                <span>${{ (item.product.price * item.quantity).toFixed(2) }}</span>
+                            </div>
+                        </div>
+                        <div class="border-t pt-4 space-y-2 mb-4">
+                            <div class="flex justify-between text-gray-600">
+                                <span>Subtotal</span>
+                                <span>${{ cartTotal.toFixed(2) }}</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Shipping</span>
+                                <span>$0.00</span>
+                            </div>
+                            <div class="border-t pt-2 flex justify-between font-bold text-gray-800 text-lg">
+                                <span>Total</span>
+                                <span>${{ cartTotal.toFixed(2) }}</span>
+                            </div>
+                        </div>
+                        <button 
+                            @click="placeOrder"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200 mb-3">
+                            Place Order
+                        </button>
+                        <button 
+                            @click="currentPage = 'cart'"
+                            class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-semibold transition-colors duration-200">
+                            Back to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Page -->
+        <div v-if="currentPage === 'confirmation'" class="container mx-auto px-4 py-8">
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="mb-6">
+                    <svg class="w-20 h-20 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Order Confirmed!</h2>
+                <p class="text-gray-600 mb-2">Thank you for your order, {{ customerInfo.name }}!</p>
+                <p class="text-gray-600 mb-6">Your order number is: <span class="font-semibold">#{{ orderNumber }}</span></p>
+                
+                <div class="bg-gray-50 rounded-lg p-6 mb-6 text-left">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Order Details</h3>
+                    <div class="space-y-2">
+                        <div v-for="item in lastOrder" :key="item.product.id" class="flex justify-between text-gray-600">
+                            <span>{{ item.product.name }} x{{ item.quantity }}</span>
+                            <span>${{ (item.product.price * item.quantity).toFixed(2) }}</span>
+                        </div>
+                        <div class="border-t pt-2 flex justify-between font-bold text-gray-800">
+                            <span>Total</span>
+                            <span>${{ lastOrderTotal.toFixed(2) }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 rounded-lg p-4 mb-6 text-left">
+                    <h3 class="font-semibold text-gray-800 mb-2">
+                        {{ deliveryMethod === 'delivery' ? '📦 Delivery Information' : '🏪 Pickup Information' }}
+                    </h3>
+                    <p class="text-gray-600 text-sm">
+                        {{ deliveryMethod === 'delivery' 
+                           ? 'Your order will be delivered to: ' + customerInfo.address 
+                           : 'Your order will be ready for pickup at our store within 24 hours.' }}
+                    </p>
+                </div>
+
+                <p class="text-gray-600 mb-6">A confirmation email has been sent to {{ customerInfo.email }}</p>
+                
+                <button 
+                    @click="continueShopping"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    currentPage: 'home',
+                    searchQuery: '',
+                    deliveryMethod: 'delivery',
+                    cart: [],
+                    lastOrder: [],
+                    lastOrderTotal: 0,
+                    orderNumber: '',
+                    customerInfo: {
+                        name: '',
+                        email: '',
+                        address: ''
+                    },
+                    products: [
+                        {
+                            id: 1,
+                            name: 'Wireless Headphones Pro',
+                            description: 'Premium noise-cancelling headphones with 30-hour battery life',
+                            price: 299.99,
+                            image: '🎧'
+                        },
+                        {
+                            id: 2,
+                            name: 'Smart Watch Ultra',
+                            description: 'Advanced fitness tracking with heart rate monitoring and GPS',
+                            price: 449.99,
+                            image: '⌚'
+                        },
+                        {
+                            id: 3,
+                            name: 'Laptop Pro 15"',
+                            description: 'Powerful laptop with 16GB RAM and 512GB SSD storage',
+                            price: 1299.99,
+                            image: '💻'
+                        },
+                        {
+                            id: 4,
+                            name: 'Smartphone X',
+                            description: 'Latest flagship phone with triple camera system and 5G',
+                            price: 899.99,
+                            image: '📱'
+                        },
+                        {
+                            id: 5,
+                            name: 'Wireless Earbuds',
+                            description: 'Compact true wireless earbuds with charging case',
+                            price: 149.99,
+                            image: '🎵'
+                        }
+                    ]
+                };
+            },
+            computed: {
+                displayedProducts() {
+                    if (!this.searchQuery) {
+                        return this.products;
+                    }
+                    const query = this.searchQuery.toLowerCase();
+                    return this.products.filter(product => 
+                        product.name.toLowerCase().includes(query) || 
+                        product.description.toLowerCase().includes(query)
+                    );
+                },
+                cartItemCount() {
+                    return this.cart.reduce((total, item) => total + item.quantity, 0);
+                },
+                cartTotal() {
+                    return this.cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+                }
+            },
+            methods: {
+                performSearch() {
+                    // Search is reactive through computed property
+                },
+                clearSearch() {
+                    this.searchQuery = '';
+                },
+                addToCart(product) {
+                    const existingItem = this.cart.find(item => item.product.id === product.id);
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        this.cart.push({ product, quantity: 1 });
+                    }
+                },
+                removeFromCart(productId) {
+                    this.cart = this.cart.filter(item => item.product.id !== productId);
+                },
+                incrementQuantity(productId) {
+                    const item = this.cart.find(item => item.product.id === productId);
+                    if (item) {
+                        item.quantity++;
+                    }
+                },
+                decrementQuantity(productId) {
+                    const item = this.cart.find(item => item.product.id === productId);
+                    if (item && item.quantity > 1) {
+                        item.quantity--;
+                    }
+                },
+                placeOrder() {
+                    if (!this.customerInfo.name || !this.customerInfo.email) {
+                        alert('Please fill in your contact information');
+                        return;
+                    }
+                    if (this.deliveryMethod === 'delivery' && !this.customerInfo.address) {
+                        alert('Please provide a delivery address');
+                        return;
+                    }
+                    
+                    // Save order details
+                    this.lastOrder = JSON.parse(JSON.stringify(this.cart));
+                    this.lastOrderTotal = this.cartTotal;
+                    this.orderNumber = 'ORD-' + Date.now().toString().slice(-8);
+                    
+                    // Clear cart
+                    this.cart = [];
+                    
+                    // Show confirmation
+                    this.currentPage = 'confirmation';
+                },
+                continueShopping() {
+                    this.currentPage = 'home';
+                    this.customerInfo = { name: '', email: '', address: '' };
+                    this.deliveryMethod = 'delivery';
+                    this.searchQuery = '';
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

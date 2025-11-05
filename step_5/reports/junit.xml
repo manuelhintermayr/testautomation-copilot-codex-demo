@@ -1,0 +1,501 @@
+<testsuites id="" name="" tests="21" failures="12" skipped="0" errors="0" time="70.890876">
+<testsuite name="techshop.spec.ts" timestamp="2025-11-05T15:23:14.804Z" hostname="chromium" tests="21" failures="12" skipped="0" time="57.829" errors="0">
+<testcase name="TechShop - Home Page › should load the home page with correct title" classname="techshop.spec.ts" time="1.322">
+</testcase>
+<testcase name="TechShop - Home Page › should display hero section with call to action" classname="techshop.spec.ts" time="1.086">
+</testcase>
+<testcase name="TechShop - Home Page › should display 20 products on home page" classname="techshop.spec.ts" time="0.974">
+</testcase>
+<testcase name="TechShop - Home Page › should show product details correctly" classname="techshop.spec.ts" time="0.958">
+</testcase>
+<testcase name="TechShop - Home Page › should display featured and new badges" classname="techshop.spec.ts" time="1.012">
+</testcase>
+<testcase name="TechShop - Search Functionality › should filter products based on search query" classname="techshop.spec.ts" time="1.543">
+</testcase>
+<testcase name="TechShop - Search Functionality › should show &quot;no results&quot; message for non-existent product" classname="techshop.spec.ts" time="1.54">
+</testcase>
+<testcase name="TechShop - Search Functionality › should clear search and show all products" classname="techshop.spec.ts" time="1.642">
+</testcase>
+<testcase name="TechShop - Shopping Cart › should add product to cart and update cart count" classname="techshop.spec.ts" time="1.023">
+</testcase>
+<testcase name="TechShop - Shopping Cart › should navigate to cart page and display added items" classname="techshop.spec.ts" time="1.227">
+<failure message="techshop.spec.ts:105:7 should navigate to cart page and display added items" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:105:7 › TechShop - Shopping Cart › should navigate to cart page and display added items 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:110:16
+
+    Error Context: ..\test-results\techshop-TechShop---Shoppi-0e98b-age-and-display-added-items-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Shoppi-0e98b-age-and-display-added-items-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Shopping Cart › should increment and decrement product quantity" classname="techshop.spec.ts" time="1.507">
+<failure message="techshop.spec.ts:121:7 should increment and decrement product quantity" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:121:7 › TechShop - Shopping Cart › should increment and decrement product quantity 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:126:16
+
+    Error Context: ..\test-results\techshop-TechShop---Shoppi-bfa1e--decrement-product-quantity-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Shoppi-bfa1e--decrement-product-quantity-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Shopping Cart › should remove product from cart" classname="techshop.spec.ts" time="1.46">
+<failure message="techshop.spec.ts:143:7 should remove product from cart" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:143:7 › TechShop - Shopping Cart › should remove product from cart ─
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:148:16
+
+    Error Context: ..\test-results\techshop-TechShop---Shoppi-037ce-ld-remove-product-from-cart-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Shoppi-037ce-ld-remove-product-from-cart-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Shopping Cart › should calculate cart total correctly" classname="techshop.spec.ts" time="1.427">
+<failure message="techshop.spec.ts:158:7 should calculate cart total correctly" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:158:7 › TechShop - Shopping Cart › should calculate cart total correctly 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:163:16
+
+    Error Context: ..\test-results\techshop-TechShop---Shoppi-f2706-culate-cart-total-correctly-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Shoppi-f2706-culate-cart-total-correctly-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Checkout Process › should navigate to checkout page from cart" classname="techshop.spec.ts" time="1.481">
+<failure message="techshop.spec.ts:172:7 should navigate to checkout page from cart" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:172:7 › TechShop - Checkout Process › should navigate to checkout page from cart 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:177:16
+
+    Error Context: ..\test-results\techshop-TechShop---Checko-3ef58--to-checkout-page-from-cart-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Checko-3ef58--to-checkout-page-from-cart-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Checkout Process › should select delivery method" classname="techshop.spec.ts" time="1.418">
+<failure message="techshop.spec.ts:185:7 should select delivery method" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:185:7 › TechShop - Checkout Process › should select delivery method 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:190:16
+
+    Error Context: ..\test-results\techshop-TechShop---Checko-d1c32-ould-select-delivery-method-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Checko-d1c32-ould-select-delivery-method-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Checkout Process › should validate required fields before placing order" classname="techshop.spec.ts" time="1.389">
+<failure message="techshop.spec.ts:201:7 should validate required fields before placing order" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:201:7 › TechShop - Checkout Process › should validate required fields before placing order 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:206:16
+
+    Error Context: ..\test-results\techshop-TechShop---Checko-154e8-fields-before-placing-order-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Checko-154e8-fields-before-placing-order-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Checkout Process › should complete checkout and show confirmation" classname="techshop.spec.ts" time="1.5">
+<failure message="techshop.spec.ts:218:7 should complete checkout and show confirmation" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:218:7 › TechShop - Checkout Process › should complete checkout and show confirmation 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:223:16
+
+    Error Context: ..\test-results\techshop-TechShop---Checko-73690-ckout-and-show-confirmation-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Checko-73690-ckout-and-show-confirmation-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Checkout Process › should clear cart after successful order" classname="techshop.spec.ts" time="1.464">
+<failure message="techshop.spec.ts:243:7 should clear cart after successful order" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:243:7 › TechShop - Checkout Process › should clear cart after successful order 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\CartPage.ts:38
+
+      36 |    */
+      37 |   async navigateToCart() {
+    > 38 |     await this.page.getByRole('button', { name: /Cart/ }).click();
+         |                                                           ^
+      39 |   }
+      40 |
+      41 |   /**
+        at CartPage.navigateToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\CartPage.ts:38:59)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:248:16
+
+    Error Context: ..\test-results\techshop-TechShop---Checko-ae48b-cart-after-successful-order-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Checko-ae48b-cart-after-successful-order-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Theme Toggle › should toggle between light and dark mode" classname="techshop.spec.ts" time="30.167">
+<failure message="techshop.spec.ts:262:7 should toggle between light and dark mode" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:262:7 › TechShop - Theme Toggle › should toggle between light and dark mode 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('button:has(svg)').filter({ has: locator('path[d*="M10 2a1 1 0 011 1v1"]') }).first()
+
+
+       at ..\utils\NavigationPage.ts:51
+
+      49 |    */
+      50 |   async toggleTheme() {
+    > 51 |     await this.themeToggleButton.first().click();
+         |                                          ^
+      52 |     await this.wait(300); // Wait for theme to apply
+      53 |   }
+      54 |
+        at NavigationPage.toggleTheme (C:\repos\testautomation-copilot-codex-demo\step_5\utils\NavigationPage.ts:51:42)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:269:22
+
+    Error Context: ..\test-results\techshop-TechShop---Theme--c2c72-between-light-and-dark-mode-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Theme--c2c72-between-light-and-dark-mode-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Navigation › should navigate between pages" classname="techshop.spec.ts" time="1.167">
+<failure message="techshop.spec.ts:283:7 should navigate between pages" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:283:7 › TechShop - Navigation › should navigate between pages ──────
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Cart/ }) resolved to 21 elements:
+        1) <button class="relative text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-400 transition font-medium">…</button> aka getByRole('button', { name: 'Cart 1' })
+        2) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).first()
+        3) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(1)
+        4) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(2)
+        5) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(3)
+        6) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(4)
+        7) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka getByRole('button', { name: 'Add to Cart' }).nth(5)
+        8) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(7) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        9) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(8) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        10) <button class="bg-gradient-to-r from-primary-600 to-purple-600 hover:from-primary-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 font-semibold transform hover:scale-105 hover:shadow-lg"> Add to Cart </button> aka locator('div:nth-child(9) > .p-6 > div:nth-child(4) > .bg-gradient-to-r.from-primary-600.to-purple-600.hover\\:from-primary-700')
+        ...
+
+    Call log:
+      - waiting for getByRole('button', { name: /Cart/ })
+
+
+       at ..\utils\NavigationPage.ts:44
+
+      42 |    */
+      43 |   async goToCart() {
+    > 44 |     await this.cartButton.click();
+         |                           ^
+      45 |   }
+      46 |
+      47 |   /**
+        at NavigationPage.goToCart (C:\repos\testautomation-copilot-codex-demo\step_5\utils\NavigationPage.ts:44:27)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:288:22
+
+    Error Context: ..\test-results\techshop-TechShop---Navigation-should-navigate-between-pages-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Navigation-should-navigate-between-pages-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="TechShop - Navigation › should scroll to products when clicking Explore Collection" classname="techshop.spec.ts" time="2.522">
+<failure message="techshop.spec.ts:300:7 should scroll to products when clicking Explore Collection" type="FAILURE">
+<![CDATA[  [chromium] › techshop.spec.ts:300:7 › TechShop - Navigation › should scroll to products when clicking Explore Collection 
+
+    TypeError: this.productsSection.isInViewport is not a function
+
+       at ..\utils\HomePage.ts:109
+
+      107 |    */
+      108 |   async isProductsSectionInViewport(): Promise<boolean> {
+    > 109 |     return await this.productsSection.isInViewport();
+          |                                       ^
+      110 |   }
+      111 |
+      112 |   /**
+        at HomePage.isProductsSectionInViewport (C:\repos\testautomation-copilot-codex-demo\step_5\utils\HomePage.ts:109:39)
+        at C:\repos\testautomation-copilot-codex-demo\step_5\tests\techshop.spec.ts:307:37
+
+    Error Context: ..\test-results\techshop-TechShop---Naviga-f8bbb-clicking-Explore-Collection-chromium\error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|..\test-results\techshop-TechShop---Naviga-f8bbb-clicking-Explore-Collection-chromium\error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

@@ -1,0 +1,23 @@
+{
+  "name": "step_1",
+  "version": "1.0.0",
+  "description": "Enhanced TechShop SUT with professional design and Vite development server",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --open sut/index.html",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "show-report": "playwright show-report"
+  },
+  "keywords": ["playwright", "testing", "e-commerce", "vite"],
+  "author": "manuelhintermayr",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "vite": "^5.0.0"
+  }
+}

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechShop Test Report - Step 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pass-rate {
+            font-size: 2.5em !important;
+        }
+
+        .table-container {
+            padding: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .test-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .test-suite {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .status {
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .status-passed {
+            background: #27ae60;
+        }
+
+        .status-failed {
+            background: #e74c3c;
+        }
+
+        .status-skipped {
+            background: #f39c12;
+        }
+
+        .duration {
+            font-family: 'Courier New', monospace;
+            color: #666;
+        }
+
+        .error-message {
+            cursor: help;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .error-container {
+            max-width: 300px;
+        }
+
+        .error-details {
+            margin-top: 5px;
+            font-size: 0.8em;
+            color: #666;
+            background: #f8f9fa;
+            padding: 5px 8px;
+            border-radius: 4px;
+            border-left: 3px solid #e74c3c;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .passed {
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .failed {
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .skipped {
+            background: rgba(243, 156, 18, 0.05);
+        }
+
+        .footer {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            color: #666;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .summary {
+            background: white;
+            margin: 20px 40px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .summary h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-item .number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .summary-item .label {
+            color: #666;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .passed-color { color: #27ae60; }
+        .failed-color { color: #e74c3c; }
+        .skipped-color { color: #f39c12; }
+        .total-color { color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 TechShop Test Report</h1>
+            <div class="subtitle">Step 4 - JUnit XML Custom Report | Generated on 5.11.2025, 17:53:10</div>
+        </div>
+
+        <div class="summary">
+            <h2>📊 Test Execution Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="number total-color">27</div>
+                    <div class="label">Total Tests</div>
+                </div>
+                <div class="summary-item">
+                    <div class="number passed-color">27</div>
+                    <div class="label">Passed</div>
+                </div>
+                <div class="summary-item">
+                    <div class="number failed-color">0</div>
+                    <div class="label">Failed</div>
+                </div>
+                <div class="summary-item">
+                    <div class="number skipped-color">0</div>
+                    <div class="label">Skipped</div>
+                </div>
+                <div class="summary-item">
+                    <div class="number total-color">100%</div>
+                    <div class="label">Pass Rate</div>
+                </div>
+                <div class="summary-item">
+                    <div class="number total-color">36.2s</div>
+                    <div class="label">Duration</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h2 style="margin-bottom: 20px; color: #333;">📋 Detailed Test Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test Name</th>
+                        <th>Test Suite</th>
+                        <th>Status</th>
+                        <th>Duration</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Home Page › should load the home page with correct title</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.97s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Home Page › should display hero section with call to action</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.23s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Home Page › should display 20 products on home page</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">0.87s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Home Page › should show product details correctly</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">0.97s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Home Page › should display featured and new badges</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">0.91s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Search Functionality › should filter products based on search query</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.57s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Search Functionality › should show "no results" message for non-existent product</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.44s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Search Functionality › should clear search and show all products</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.59s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Shopping Cart › should add product to cart and update cart count</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">0.96s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Shopping Cart › should navigate to cart page and display added items</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.06s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Shopping Cart › should increment and decrement product quantity</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.15s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Shopping Cart › should remove product from cart</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.17s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Shopping Cart › should calculate cart total correctly</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.22s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Checkout Process › should navigate to checkout page from cart</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.25s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Checkout Process › should select delivery method</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.15s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Checkout Process › should validate required fields before placing order</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.54s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Checkout Process › should complete checkout and show confirmation</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.41s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Checkout Process › should clear cart after successful order</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.49s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Theme Toggle › should toggle between light and dark mode</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.78s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Navigation › should navigate between pages</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.18s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Navigation › should scroll to products when clicking Explore Collection</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">2.94s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Drone Delivery › should show drone delivery option when all items support it</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.16s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Drone Delivery › should disable drone delivery when cart contains unsupported items</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.28s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Drone Delivery › should prevent checkout with drone delivery for unsupported items</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.32s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Drone Delivery › should successfully complete checkout with drone delivery for supported items</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.34s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Drone Delivery › should show correct drone delivery fee</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.14s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                            <tr class="passed">
+                                <td class="test-name">TechShop - Drone Delivery › should show FREE for other delivery methods</td>
+                                <td class="test-suite">techshop.spec.ts</td>
+                                <td class="status status-passed">PASSED</td>
+                                <td class="duration">1.11s</td>
+                                <td class="error">✅</td>
+                            </tr>
+                        
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>📊 Report generated from JUnit XML by TechShop Step 4 Custom Report Generator</p>
+            <p>🚀 Powered by Playwright & Node.js | Generated at 5.11.2025, 17:53:10</p>
+        </div>
+    </div>
+</body>
+</html>

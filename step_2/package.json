@@ -1,0 +1,23 @@
+{
+  "name": "step_2",
+  "version": "1.0.0",
+  "description": "Modular TechShop SUT with separated components (JSON data, CSS, JS files)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --open sut/index.html",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "show-report": "playwright show-report"
+  },
+  "keywords": ["playwright", "testing", "e-commerce", "vite", "modular"],
+  "author": "manuelhintermayr",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "vite": "^5.0.0"
+  }
+}
