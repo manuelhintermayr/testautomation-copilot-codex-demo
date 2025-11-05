@@ -215,14 +215,3 @@ npx playwright test
 # View test report
 npx playwright show-report
 ```
-
-## Next Steps
-
-Future steps (step_1, step_2, etc.) will progressively:
-1. Create tests for the TechShop application
-2. Implement page object models
-3. Add advanced test patterns
-4. Demonstrate AI-assisted test generation
-5. Show test maintenance and refactoring techniques
-
-Each subsequent step will include its own PROMPT.md documenting the exact prompts used and the evolution of the test automation suite.

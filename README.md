@@ -37,6 +37,14 @@ Located in `step_x/sut/`, this folder contains the application being tested - a 
   - Includes Playwright test framework configuration
   - See `step_0/PROMPT.md` for detailed prompts and implementation notes
 
+- **step_1**: Professional TechShop with Vite & Dark Mode
+  - Complete visual redesign with futuristic, sales-optimized design
+  - Vite development server integration for modern development workflow
+  - Dark/Light mode implementation with system preference detection
+  - Expanded product catalog from 5 to 20 premium tech products across 10 categories
+  - Enhanced UX with glass morphism effects, animations, and professional typography
+  - See `step_1/PROMPT.md` for detailed implementation and improvements
+
 
 ## Purpose
 
